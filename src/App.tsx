@@ -1,8 +1,12 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 
 function App(): JSX.Element {
-  return <SafeAreaView></SafeAreaView>;
+  return <SafeAreaView>
+    <View>
+      <Text>Hello</Text>
+    </View>
+  </SafeAreaView>;
 }
 
 export default App;

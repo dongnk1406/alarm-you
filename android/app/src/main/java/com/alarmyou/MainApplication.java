@@ -9,6 +9,8 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
+import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage; // watermelondb
+import com.facebook.react.bridge.JSIModulePackage;  // watermelondb
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -41,6 +43,11 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected Boolean isHermesEnabled() {
           return BuildConfig.IS_HERMES_ENABLED;
+        }
+
+        @Override
+        protected JSIModulePackage getJSIModulePackage() {
+          return new WatermelonDBJSIPackage(); // watermelondb
         }
       };
 
