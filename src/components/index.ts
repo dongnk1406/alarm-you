@@ -1,1 +1,2 @@
-export * from './StyledButton'
+export * from './StyledButton';
+export * from './StyledImage';
