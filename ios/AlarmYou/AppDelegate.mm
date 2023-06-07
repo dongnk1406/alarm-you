@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -7,6 +8,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.moduleName = @"AlarmYou";
+  [GMSServices provideAPIKey:@"AIzaSyBSvFSURkRoxx2IbvdyW4lVAxfmuuFilRk"]; // add this line using the api key obtained from Google Console
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

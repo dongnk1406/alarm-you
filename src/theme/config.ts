@@ -1,0 +1,40 @@
+export const config = {
+  fontFamily: {
+    'primary-200': ['Montserrat-ExtraLight'],
+    'primary-300': ['Montserrat-Light'],
+    'primary-400': ['Montserrat-Regular'],
+    'primary-500': ['Montserrat-Medium'],
+    'primary-600': ['Montserrat-SemiBold'],
+    'primary-700': ['Montserrat-Bold'],
+    'primary-800': ['Montserrat-ExtraBold'],
+    'primary-900': ['Montserrat-Black'],
+  },
+  spacings: {
+    's-0': 0,
+    's-0.5': 2,
+    's-1': 4,
+    's-1.5': 6,
+    's-2': 8,
+    's-2.5': 10,
+    's-3': 12,
+    's-3.5': 14,
+    's-4': 16,
+  },
+  textVariants: {
+    body: {
+      fontSize: 16,
+      lineHeight: 24,
+    },
+    'text-xs': {
+      fontSize: 12,
+    },
+    'text-sm': {},
+    'text-base': {},
+    'text-lg': {},
+    'text-xl': {},
+    'text-2xl': {},
+    'text-3xl': {},
+    'text-4xl': {},
+    'text-5xl': {},
+  },
+};
