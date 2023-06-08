@@ -1,6 +1,6 @@
-import { createBox, createText, createTheme } from '@shopify/restyle';
-import { palette } from './palette';
+import { createTheme } from '@shopify/restyle';
 import { config } from './config';
+import { palette } from './palette';
 
 export const lightTheme = createTheme({
   colors: {
@@ -41,6 +41,3 @@ export const darkTheme: Theme = {
     primaryCardText: palette.darkGray,
   },
 };
-
-export const StyledBox = createBox<Theme>();
-export const StyledText = createText<Theme>();

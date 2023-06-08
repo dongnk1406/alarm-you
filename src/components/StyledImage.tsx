@@ -1,31 +1,39 @@
-import React, {ReactElement, useState} from 'react';
-import {ActivityIndicator, View} from 'react-native';
-import FastImage, {FastImageProps} from 'react-native-fast-image';
+import React, {useState} from 'react';
+import {StyleProp, View} from 'react-native';
+import FastImage, {FastImageProps, ImageStyle} from 'react-native-fast-image';
 
 interface IProps extends FastImageProps {
   renderSkeletonLoading?: () => React.ReactElement;
+  style?: StyleProp<ImageStyle>;
 }
 
-export const StyledImage = ({renderSkeletonLoading, ...props}: IProps) => {
-  const [loading, setLoading] = useState<boolean>(false);
+export const StyledImage = ({
+  renderSkeletonLoading,
+  style,
+  ...props
+}: IProps) => {
+  const [loaded, setLoaded] = useState<boolean>(false);
 
-  const onLoadStart = () => {
-    console.log('start');
-    // setLoading(true);
-  };
-  const onLoadEnd = () => {
-    console.log('end');
-    // setLoading(false);
+  const renderImageLoading = () => {
+    return (
+      <View style={style}>
+        {renderSkeletonLoading ? (
+          renderSkeletonLoading()
+        ) : (
+          <View style={[{backgroundColor: '#ccc', flex: 1}]} />
+        )}
+      </View>
+    );
   };
 
-  if (loading) {
-    if (renderSkeletonLoading) {
-      return renderSkeletonLoading();
-    }
-    return <ActivityIndicator size="small" />;
-  }
+  const onLoaded = () => {
+    setLoaded(true);
+  };
 
   return (
-    <FastImage onLoadStart={onLoadStart} onLoadEnd={onLoadEnd} {...props} />
+    <View style={style}>
+      {!loaded && renderImageLoading()}
+      <FastImage onLoad={onLoaded} style={style} {...props} />
+    </View>
   );
 };

@@ -1,19 +1,26 @@
-import { ThemeProvider } from '@shopify/restyle';
-import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import {ThemeProvider} from '@shopify/restyle';
+import React, {useState} from 'react';
+import {SafeAreaView, Text, View} from 'react-native';
 import Config from 'react-native-config';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { darkTheme, lightTheme } from 'src/theme';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import {darkTheme, lightTheme} from 'src/theme';
+import {StyledImage, StyledText} from 'src/components';
 
 function App(): JSX.Element {
   const [darkMode, setDarkMode] = useState(false);
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-      <View style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1}}>
+        <StyledImage
+          source={{
+            uri: 'https://images.unsplash.com/photo-1681052027179-5471edd589c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+          }}
+          style={{width: '100%', height: 300}}
+        />
         <MapView
           provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-          style={{flex: 1}}
+          style={{width: '100%', height: 300}}
           region={{
             latitude: 37.78825,
             longitude: -122.4324,
@@ -21,7 +28,10 @@ function App(): JSX.Element {
             longitudeDelta: 0.0121,
           }}
         />
-      </View>
+        <StyledText variant='body'>
+          Hello
+        </StyledText>
+      </SafeAreaView>
       {Config.MODE !== 'LIVE' && (
         <View
           style={{
