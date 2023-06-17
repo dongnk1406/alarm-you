@@ -7,6 +7,7 @@ import {ChatScreen} from 'src/containers';
 import {ELanguage} from 'src/shared/interfaces';
 import {changeLanguage} from 'src/utils/i18next';
 import Toast from 'react-native-toast-message';
+import permission from 'src/utils/permission';
 
 function Home() {
   const navigation = useNavigation();
@@ -15,8 +16,27 @@ function Home() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <TouchableOpacity
-        style={{backgroundColor: 'orange', padding: 8, borderRadius: 4}}
-        onPress={() => navigation.navigate('Map')}>
+        style={{
+          backgroundColor: 'orange',
+          padding: 8,
+          borderRadius: 4,
+          marginTop: 12,
+        }}
+        onPress={async () => {
+          const hasPermission = await permission.requestPhotoLibrary();
+        }}>
+        <Text>Open gallery</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'orange',
+          padding: 8,
+          borderRadius: 4,
+          marginTop: 12,
+        }}
+        onPress={async () => {
+          navigation.navigate('Map');
+        }}>
         <Text>{t('common.map')}</Text>
       </TouchableOpacity>
       <TouchableOpacity

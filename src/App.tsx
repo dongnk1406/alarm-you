@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Platform, Text, UIManager, View} from 'react-native';
 import Config from 'react-native-config';
 import {StyledDisconnect} from 'src/components';
-import {Navigators} from 'src/navigations';
+import {Navigators} from 'src/navigation';
 import {onNotificationBoot} from 'src/services/notification';
 import 'src/utils/i18next';
 import AppProvider from './AppProvider';

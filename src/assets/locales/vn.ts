@@ -12,6 +12,7 @@ const vn: TTranslations = {
     back: 'Quay lại',
     disconnect: 'Ngắt kết nối',
     disconnectDescription: 'Kết nối của bạn bị gián đoạn',
+    goToSetting: 'Đi tới cài đặt',
   },
 };
 
