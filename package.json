@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "pod": "cd ios && pod install && cd ..",
+    "pod": "react-native setup-ios-permissions && cd ios && pod install && cd ..",
     "android-clean": "cd android && ./gradlew clean && cd ..",
     "android-build-apk-develop": "rm -rf build && rm -rf android/build && cd android && ./gradlew assembleDevRelease && cd .."
   },
@@ -22,6 +22,7 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@shopify/restyle": "^2.4.2",
+    "axios": "^1.4.0",
     "i18next": "^23.1.0",
     "react": "18.2.0",
     "react-i18next": "^13.0.0",
@@ -59,5 +60,10 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "reactNativePermissionsIOS": [
+    "Camera",
+    "Notifications",
+    "PhotoLibrary"
+  ]
 }
