@@ -15,7 +15,6 @@ end
 target 'AlarmYou' do
   config = use_native_modules!
   use_frameworks! :linkage => :static
-  # right after `use_frameworks! :linkage => :static`
   $RNFirebaseAsStaticFramework = true
   
   rn_maps_path = '../node_modules/react-native-maps'
@@ -40,6 +39,22 @@ target 'AlarmYou' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # NOTE: Fix bug WatermelonDB not compatibility with use_frameworks
+  # https://github.com/Nozbe/WatermelonDB/issues/1285#issuecomment-1381323060
+  $static_framework = [ 
+    'WatermelonDB',
+      'simdjson',
+  ]
+  pre_install do |installer|
+    Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+      installer.pod_targets.each do |pod|
+        if $static_framework.include?(pod.name)
+          def pod.build_type;
+          Pod::BuildType.static_library # >= 1.9
+        end
+      end
+    end
+  end
   # WatermelonDB dependency
   pod 'simdjson', path: '../node_modules/@nozbe/simdjson', modular_headers: true
 
