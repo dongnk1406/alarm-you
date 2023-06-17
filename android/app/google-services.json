@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "833947949628",
+    "project_id": "alarm-you",
+    "storage_bucket": "alarm-you.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833947949628:android:0723ed5de3350487308139",
+        "android_client_info": {
+          "package_name": "com.alarmyou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833947949628-f7thl2eckvr1q7i5qkp2snkde76fa758.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk5N1Lxk8xwPKB4HoC-G4Y-DO4Tnbk3yE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833947949628-f7thl2eckvr1q7i5qkp2snkde76fa758.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

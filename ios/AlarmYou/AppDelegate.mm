@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 #import <GoogleMaps/GoogleMaps.h>
-
+#import <Firebase.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
@@ -9,6 +9,8 @@
 {
   self.moduleName = @"AlarmYou";
   [GMSServices provideAPIKey:@"AIzaSyBSvFSURkRoxx2IbvdyW4lVAxfmuuFilRk"]; // add this line using the api key obtained from Google Console
+  // Add Firebase configure 
+  [FIRApp configure];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
