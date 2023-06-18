@@ -8,7 +8,7 @@ export const Navigators = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="Home">
+      initialRouteName="AppTab">
       {AppStacks()}
     </Stack.Navigator>
   );

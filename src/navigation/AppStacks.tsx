@@ -1,13 +1,13 @@
 import React from 'react';
 import {MapScreen} from 'src/containers';
-import HomeScreen from 'src/containers/HomeScreen';
+import {AppTab} from './AppTab';
 import {Stack} from './Navigators';
 
 export const AppStacks = () => {
   return (
     <Stack.Group>
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="Map" component={MapScreen} />
+      <Stack.Screen name="AppTab" component={AppTab} />
+      <Stack.Screen name="MapScreen" component={MapScreen} />
     </Stack.Group>
   );
 };

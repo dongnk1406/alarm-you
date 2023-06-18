@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {Platform, Text, UIManager, View} from 'react-native';
 import Config from 'react-native-config';
+import Toast from 'react-native-toast-message';
 import {StyledDisconnect} from 'src/components';
 import {Navigators} from 'src/navigation';
 import {onNotificationBoot} from 'src/services/notification';
@@ -11,16 +12,18 @@ function App(): JSX.Element {
   onNotificationBoot();
 
   useEffect(() => {
-    if (Platform.OS === 'android') {
-      if (UIManager.setLayoutAnimationEnabledExperimental) {
-        UIManager.setLayoutAnimationEnabledExperimental(true);
-      }
+    if (
+      Platform.OS === 'android' &&
+      UIManager.setLayoutAnimationEnabledExperimental
+    ) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
     }
   }, []);
 
   return (
     <AppProvider>
       <Navigators />
+      <Toast />
       <StyledDisconnect />
       {Config.MODE !== 'LIVE' && (
         <View

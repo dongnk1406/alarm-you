@@ -7,7 +7,8 @@ import {
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
+import {StyleSheet} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 export const navigationRef = createNavigationContainerRef();
 
@@ -15,15 +16,22 @@ const AppProvider = ({children}: PropsWithChildren) => {
   const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      <SafeAreaProvider>
-        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-          {children}
-          <Toast />
-        </ThemeProvider>
-      </SafeAreaProvider>
-    </NavigationContainer>
+    <GestureHandlerRootView style={styles.container}>
+      <NavigationContainer ref={navigationRef}>
+        <SafeAreaProvider>
+          <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+            {children}
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default AppProvider;
