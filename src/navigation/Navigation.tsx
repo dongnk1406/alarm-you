@@ -4,7 +4,7 @@ import {AppStacks} from './AppStacks';
 
 export const Stack = createNativeStackNavigator();
 
-export const Navigators = () => {
+export const Navigation = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}

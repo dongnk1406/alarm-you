@@ -1,7 +1,7 @@
 import React from 'react';
 import {MapScreen} from 'src/containers';
 import {AppTab} from './AppTab';
-import {Stack} from './Navigators';
+import {Stack} from './Navigation';
 
 export const AppStacks = () => {
   return (

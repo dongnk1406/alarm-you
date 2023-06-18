@@ -3,7 +3,7 @@ import {Platform, Text, UIManager, View} from 'react-native';
 import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
 import {StyledDisconnect} from 'src/components';
-import {Navigators} from 'src/navigation';
+import {Navigation} from 'src/navigation';
 import {onNotificationBoot} from 'src/services/notification';
 import 'src/utils/i18next';
 import AppProvider from './AppProvider';
@@ -22,7 +22,7 @@ function App(): JSX.Element {
 
   return (
     <AppProvider>
-      <Navigators />
+      <Navigation />
       <Toast />
       <StyledDisconnect />
       {Config.MODE !== 'LIVE' && (
