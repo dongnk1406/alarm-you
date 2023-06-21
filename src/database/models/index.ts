@@ -1,1 +1,2 @@
-export * from './Post.model'
+export * from './skillsModel';
+export * from './userModel';

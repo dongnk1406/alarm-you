@@ -2,11 +2,11 @@ import {Database} from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 
 import migrations from './migrations';
-import {Post} from './models';
-import {schema} from './schema';
+import {SkillsModel, UserModel} from './models';
+import {schema} from './schemas';
 
 const adapter = new SQLiteAdapter({
-  dbName: 'Watermelon DB',
+  dbName: 'Watermelon DB 2',
   schema: schema,
   // (You might want to comment it out for development purposes -- see Migrations documentation)
   migrations: migrations,
@@ -24,5 +24,7 @@ const adapter = new SQLiteAdapter({
 // Then, make a Watermelon database from it!
 const database = new Database({
   adapter,
-  modelClasses: [Post],
+  modelClasses: [SkillsModel, UserModel],
 });
+
+export default database;

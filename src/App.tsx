@@ -6,7 +6,7 @@ import {StyledDisconnect} from 'src/components';
 import {Navigation} from 'src/navigation';
 import {onNotificationBoot} from 'src/services/notification';
 import 'src/utils/i18next';
-import AppProvider from './AppProvider';
+import AppProvider from 'src/providers';
 
 function App(): JSX.Element {
   onNotificationBoot();

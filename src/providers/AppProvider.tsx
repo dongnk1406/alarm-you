@@ -1,7 +1,7 @@
 import {ThemeProvider} from '@shopify/restyle';
 import React, {useState} from 'react';
 import {PropsWithChildren} from 'react';
-import {darkTheme, lightTheme} from './theme';
+import {darkTheme, lightTheme} from 'src/theme';
 import {
   NavigationContainer,
   createNavigationContainerRef,
