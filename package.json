@@ -31,6 +31,7 @@
     "react-i18next": "^13.0.0",
     "react-native": "0.71.0",
     "react-native-background-timer": "^2.4.1",
+    "react-native-code-push": "^8.0.2",
     "react-native-config": "^1.5.1",
     "react-native-fast-image": "^8.6.3",
     "react-native-geolocation-service": "^5.3.1",

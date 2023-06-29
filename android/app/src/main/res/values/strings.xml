@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AlarmYou</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">aqA-TUtYjq1Zvy7SBvY_AddJAghGaxbxyDx9a</string>
 </resources>

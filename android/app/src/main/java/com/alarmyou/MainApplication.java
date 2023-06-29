@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.List;
 import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage; // set up watermelondb with jsi
 import com.facebook.react.bridge.JSIModulePackage;  // set up watermelondb with jsi
+import com.microsoft.codepush.react.CodePush;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -49,6 +50,11 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected JSIModulePackage getJSIModulePackage() {
           return new WatermelonDBJSIPackage();
+        }
+
+        @Override
+        protected String getJSBundleFile() {
+          return CodePush.getJSBundleFile();
         }
       };
 
