@@ -134,10 +134,10 @@ We use Reactotron to check the debugger. If you want to use the Chrome debugger,
 git switch feature/example-branch-name
 git add .
 git commit -m "Commit"
-git switch dev
-git pull origin dev
+git switch develop
+git pull origin develop
 git switch feature/example-branch-name
-git rebase dev
+git rebase develop
 (resolve conflicts if have)
 git push origin feature/example-branch-name
 ```

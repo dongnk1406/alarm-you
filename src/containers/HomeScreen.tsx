@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import reactotron from 'reactotron-react-native';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
 import permission from 'src/utils/permission';

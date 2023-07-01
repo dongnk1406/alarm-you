@@ -29,7 +29,7 @@ const useZoomInAnimation = () => {
     opacity.value = withTiming(1, {
       duration: 500,
     });
-  }, []);
+  }, [opacity, scaleValue]);
 
   return scaleStyle;
 };
