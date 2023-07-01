@@ -2,14 +2,14 @@ import {
   AllProps,
   all,
   composeRestyleFunctions,
-  useRestyle
+  useRestyle,
 } from '@shopify/restyle';
 import {
   TouchableHighlightProps,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import { Theme } from 'src/theme';
+import {Theme} from 'src/theme';
 
 type RestyleProps = AllProps<Theme>;
 

@@ -8,7 +8,7 @@ screen: reports entire screen's width/height
 */
 const {width, height} = Dimensions.get('window');
 
-const metrics = () => {
+const _Metrics = () => {
   const insets = useSafeAreaInsets();
   return {
     screenHeight: width < height ? height : width,
@@ -19,6 +19,6 @@ const metrics = () => {
   };
 };
 
-const Metrics = metrics();
+const Metrics = _Metrics();
 
 export default Metrics;

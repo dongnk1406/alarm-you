@@ -1,2 +1,2 @@
 export * from './NotificationService';
-export * from './onNotificationBoot';
+export * from './useNotificationBoot';

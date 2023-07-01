@@ -5,7 +5,7 @@ import messaging, {
 import {useEffect} from 'react';
 import {NotificationService} from './NotificationService';
 
-export const onNotificationBoot = () => {
+export const useNotificationBoot = () => {
   useEffect(() => {
     notifee
       .setBadgeCount(0)
@@ -30,7 +30,9 @@ export const onNotificationBoot = () => {
 
     notifee.onBackgroundEvent(async ({detail}) => {
       const {notification} = detail;
-      NotificationService.cancelNotification(notification?.id);
+      if (notification?.id) {
+        NotificationService.cancelNotification(notification.id);
+      }
     });
 
     messaging().setBackgroundMessageHandler(async remoteMessage => {

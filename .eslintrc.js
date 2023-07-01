@@ -5,7 +5,7 @@ module.exports = {
     es2021: true,
     'react-native/react-native': true,
   },
-  extends: ['@react-native-community'],
+  extends: ['@react-native-community', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -32,6 +32,7 @@ module.exports = {
         'no-shadow': 'off',
         'no-undef': 'off',
         'no-console': 1,
+        'react-native/no-inline-styles': 'off',
       },
     },
   ],

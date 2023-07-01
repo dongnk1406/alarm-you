@@ -4,12 +4,12 @@ import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
 import {StyledDisconnect} from 'src/components';
 import {Navigation} from 'src/navigation';
-import {onNotificationBoot} from 'src/services/notification';
+import {useNotificationBoot} from 'src/services/notification';
 import 'src/utils/i18next';
 import AppProvider from 'src/providers';
 
 function App(): JSX.Element {
-  onNotificationBoot();
+  useNotificationBoot();
 
   useEffect(() => {
     if (

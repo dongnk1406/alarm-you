@@ -5,10 +5,10 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prettier-format": "prettier --config .prettierrc.js './src/**/*.ts' --write",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "start": "react-native start",
     "test": "jest",
+    "format": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --write",
     "pod": "react-native setup-ios-permissions && cd ios && pod install && cd ..",
     "android-clean": "cd android && ./gradlew clean && cd ..",
     "android-build-apk-develop": "rm -rf build && rm -rf android/build && cd android && ./gradlew assembleDevRelease && cd ..",
