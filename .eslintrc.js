@@ -5,7 +5,7 @@ module.exports = {
     es2021: true,
     'react-native/react-native': true,
   },
-  extends: ['@react-native-community', 'prettier'],
+  extends: ['@react-native', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
