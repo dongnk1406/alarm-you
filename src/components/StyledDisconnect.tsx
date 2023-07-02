@@ -3,7 +3,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {t} from 'i18next';
 import Toast from 'react-native-toast-message';
 
-export const StyledDisconnect = () => {
+const StyledDisconnect = () => {
   const [isConnected, setIsConnected] = useState<boolean | null>(false);
 
   const showDisconnectToast = () => {
@@ -34,3 +34,5 @@ export const StyledDisconnect = () => {
 
   return <></>;
 };
+
+export default StyledDisconnect;

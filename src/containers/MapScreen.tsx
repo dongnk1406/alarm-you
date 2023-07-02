@@ -7,7 +7,7 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import permission from 'src/utils/permission';
 
-export function MapScreen(): JSX.Element {
+function MapScreen(): JSX.Element {
   const navigation = useNavigation();
   const areaInsets = useSafeAreaInsets();
   const [region, setRegion] = useState({
@@ -79,3 +79,5 @@ export function MapScreen(): JSX.Element {
     </View>
   );
 }
+
+export default MapScreen;

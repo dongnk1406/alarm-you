@@ -21,8 +21,10 @@ type Props = RestyleProps &
   TouchableHighlightProps &
   Partial<{}>;
 
-export const StyledButton = ({children, ...rest}: Props) => {
+const StyledButton = ({children, ...rest}: Props) => {
   const props = useRestyle(restyleFunctions, rest);
 
   return <TouchableOpacity {...props}>{children}</TouchableOpacity>;
 };
+
+export default StyledButton;

@@ -7,11 +7,7 @@ interface IProps extends FastImageProps {
   style?: StyleProp<ImageStyle>;
 }
 
-export const StyledImage = ({
-  renderSkeletonLoading,
-  style,
-  ...props
-}: IProps) => {
+const StyledImage = ({renderSkeletonLoading, style, ...props}: IProps) => {
   const [loaded, setLoaded] = useState<boolean>(false);
 
   const renderImageLoading = () => {
@@ -37,3 +33,5 @@ export const StyledImage = ({
     </View>
   );
 };
+
+export default StyledImage;

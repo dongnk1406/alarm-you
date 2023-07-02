@@ -1,3 +1,5 @@
+import withObservables from '@nozbe/with-observables';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
@@ -10,11 +12,15 @@ import {
 } from 'react-native';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
+import {AllStackParamList} from 'src/navigation/types';
 
-export const ChatScreen = () => {
+type Props = NativeStackScreenProps<AllStackParamList, 'MapScreen'> & {
+  skills: SkillsModel[];
+};
+const ChatScreen = ({navigation, skills}: Props) => {
   const {t} = useTranslation('translation');
   const [text, setText] = useState<string | undefined>('');
-  const [listSkill, setListSkill] = useState<SkillsModel[]>([]);
+  const [listSkill, setListSkill] = useState<SkillsModel[]>();
 
   const handleSaveSkill = async () => {
     await database.write(async () => {
@@ -25,18 +31,13 @@ export const ChatScreen = () => {
     });
 
     setText('');
-    fetchData();
-  };
-
-  const fetchData = async () => {
-    const skillsCollection = database.get<SkillsModel>('skills');
-    const response = await skillsCollection.query().fetch();
-    setListSkill(response);
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (skills) {
+      setListSkill(skills);
+    }
+  }, [skills]);
 
   const handleSignOut = () => {};
 
@@ -76,7 +77,7 @@ export const ChatScreen = () => {
         </View>
 
         <View style={{marginTop: 12}}>
-          {listSkill.map(skill => (
+          {listSkill?.map(skill => (
             <View
               key={skill.id}
               style={{
@@ -96,3 +97,9 @@ export const ChatScreen = () => {
     </SafeAreaView>
   );
 };
+
+const enhance = withObservables(['skills'], () => ({
+  skills: database.get<SkillsModel>('skills').query().observe(),
+}));
+
+export default enhance(ChatScreen);

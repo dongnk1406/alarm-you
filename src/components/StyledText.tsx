@@ -1,4 +1,6 @@
 import {createText} from '@shopify/restyle';
 import {Theme} from 'src/theme';
 
-export const StyledText = createText<Theme>();
+const StyledText = createText<Theme>();
+
+export default StyledText;

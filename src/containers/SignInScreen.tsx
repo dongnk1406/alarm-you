@@ -9,7 +9,7 @@ import {
 import database from 'src/database/database';
 import {UserModel} from 'src/database/models';
 
-export const SignInScreen = () => {
+const SignInScreen = () => {
   const [email, setEmail] = useState<string>('');
   const [token, setToken] = useState<string>('');
 
@@ -65,3 +65,5 @@ export const SignInScreen = () => {
     </SafeAreaView>
   );
 };
+
+export default SignInScreen;

@@ -4,8 +4,9 @@ import {AppStacks} from './AppStacks';
 import {GuestStacks} from './GuestStacks';
 import database from 'src/database/database';
 import {UserModel} from 'src/database/models';
+import {AllStackParamList} from './types';
 
-export const Stack = createNativeStackNavigator();
+export const Stack = createNativeStackNavigator<AllStackParamList>();
 
 export const Navigation = () => {
   const [token, setToken] = useState<string | undefined>();

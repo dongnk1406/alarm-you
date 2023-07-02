@@ -1,4 +1,6 @@
-export * from './ChatScreen';
-export * from './MapScreen';
-export * from './HomeScreen';
-export * from './SignInScreen';
+import HomeScreen from './HomeScreen';
+import MapScreen from './MapScreen';
+import ChatScreen from './ChatScreen';
+import SignInScreen from './SignInScreen';
+
+export {HomeScreen, MapScreen, ChatScreen, SignInScreen};

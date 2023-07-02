@@ -11,7 +11,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const StyledContainer = ({withHeader = true, children}: Props) => {
+const StyledContainer = ({withHeader = true, children}: Props) => {
   return (
     <StyledView style={styles.container}>
       {withHeader && <StyledHeader />}
@@ -25,3 +25,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default StyledContainer;

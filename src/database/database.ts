@@ -6,7 +6,7 @@ import {SkillsModel, UserModel} from './models';
 import {schema} from './schemas';
 
 const adapter = new SQLiteAdapter({
-  dbName: 'Watermelon DB 2',
+  dbName: 'WatermelonDB_2',
   schema: schema,
   // (You might want to comment it out for development purposes -- see Migrations documentation)
   migrations: migrations,

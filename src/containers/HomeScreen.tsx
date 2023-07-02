@@ -14,7 +14,7 @@ import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
 import permission from 'src/utils/permission';
 
-export const HomeScreen = () => {
+const HomeScreen = () => {
   const navigation = useNavigation();
   const {t} = useTranslation('translation');
   const [text, setText] = useState<string | undefined>('');
@@ -77,6 +77,7 @@ export const HomeScreen = () => {
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: 16,
+          paddingBottom: 60,
         }}>
         <TouchableOpacity
           style={{
@@ -208,3 +209,5 @@ export const HomeScreen = () => {
     </SafeAreaView>
   );
 };
+
+export default HomeScreen;
