@@ -1,6 +1,6 @@
 import {appSchema} from '@nozbe/watermelondb';
 import {skillsSchema} from './skillsSchema';
-import {userSchema} from './userSchema';
+import {usersSchema} from './usersSchema';
 
 /*
 See how to define schema and more convention https://watermelondb.dev/docs/Schema
@@ -8,5 +8,5 @@ See how to define schema and more convention https://watermelondb.dev/docs/Schem
 
 export const schema = appSchema({
   version: 1,
-  tables: [skillsSchema, userSchema],
+  tables: [skillsSchema, usersSchema],
 });

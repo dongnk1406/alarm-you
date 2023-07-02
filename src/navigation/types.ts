@@ -12,7 +12,7 @@
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
 export type AllStackParamList = {
-  BottomTabs: BottomTabScreenProps<BottomTabsParamList>;
+  AppTab: BottomTabScreenProps<BottomTabsParamList>;
 } & GuestStacks &
   GeneralParamList;
 

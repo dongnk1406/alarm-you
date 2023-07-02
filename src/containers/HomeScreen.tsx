@@ -1,8 +1,9 @@
 import {Q} from '@nozbe/watermelondb';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import React, {useCallback, useEffect, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
@@ -33,7 +34,7 @@ const HomeScreen = () => {
       setCurrentSkill(undefined);
     } else {
       await database.write(async () => {
-        await database.get<SkillsModel>('skills').create(skill => {
+        await database.collections.get<SkillsModel>('skills').create(skill => {
           skill.name = text;
           skill.type = type;
         });
@@ -60,12 +61,6 @@ const HomeScreen = () => {
     setListSkill(response);
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      fetchData();
-    }, []),
-  );
-
   useEffect(() => {
     fetchData();
   }, [type]);
@@ -78,7 +73,15 @@ const HomeScreen = () => {
         contentContainerStyle={{
           paddingHorizontal: 16,
           paddingBottom: 60,
-        }}>
+        }}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={() => {
+              fetchData();
+            }}
+          />
+        }>
         <TouchableOpacity
           style={{
             backgroundColor: 'orange',

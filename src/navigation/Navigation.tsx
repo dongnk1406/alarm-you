@@ -25,7 +25,7 @@ export const Navigation = () => {
     <Stack.Navigator
       screenOptions={{headerShown: false}}
       initialRouteName="SignInScreen">
-      {true ? AppStacks() : GuestStacks()}
+      {token ? AppStacks() : GuestStacks()}
     </Stack.Navigator>
   );
 };

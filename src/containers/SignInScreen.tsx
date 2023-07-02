@@ -6,22 +6,44 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
+import uuid from 'react-native-uuid';
+import reactotron from 'reactotron-react-native';
 import database from 'src/database/database';
-import {UserModel} from 'src/database/models';
+import {UsersModel} from 'src/database/models';
+import {navigationRef} from 'src/providers/AppProvider';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState<string>('');
-  const [token, setToken] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  // const handleSubmit = async () => {
+  //   const usersCollection = database.get<UsersModel>('users');
+  //   try {
+  //     await usersCollection.find(email);
+  //     Toast.show({
+  //       type: 'error',
+  //       text1: 'Registered',
+  //     });
+  //   } catch (error) {
+  //     await database.write(async () => {
+  //       await usersCollection.create(user => {
+  //         user.email = email;
+  //         user.password = password;
+  //         user.token = uuid.v4().toString();
+  //       });
+  //     });
+  //     Toast.show({
+  //       type: 'success',
+  //       text1: 'Successfully',
+  //     });
+  //   }
+  // };
 
   const handleSubmit = async () => {
-    await database.write(async () => {
-      await database.get<UserModel>('user').create(user => {
-        user.email = email;
-        user.token = token;
-      });
-    });
+    const user = await UsersModel.login(email, password);
+    reactotron.log('users', user);
   };
-
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, paddingHorizontal: 16}}>
@@ -37,10 +59,10 @@ const SignInScreen = () => {
             padding: 8,
           }}
         />
-        <Text>Token</Text>
+        <Text>Password</Text>
         <TextInput
-          value={token}
-          onChangeText={setToken}
+          value={password}
+          onChangeText={setPassword}
           autoCapitalize="none"
           style={{
             borderWidth: 1,

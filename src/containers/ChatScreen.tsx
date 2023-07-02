@@ -1,10 +1,10 @@
 import withObservables from '@nozbe/with-observables';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
+  FlatList,
   SafeAreaView,
-  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -20,7 +20,6 @@ type Props = NativeStackScreenProps<AllStackParamList, 'MapScreen'> & {
 const ChatScreen = ({navigation, skills}: Props) => {
   const {t} = useTranslation('translation');
   const [text, setText] = useState<string | undefined>('');
-  const [listSkill, setListSkill] = useState<SkillsModel[]>();
 
   const handleSaveSkill = async () => {
     await database.write(async () => {
@@ -33,53 +32,48 @@ const ChatScreen = ({navigation, skills}: Props) => {
     setText('');
   };
 
-  useEffect(() => {
-    if (skills) {
-      setListSkill(skills);
-    }
-  }, [skills]);
-
   const handleSignOut = () => {};
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView
-        contentContainerStyle={{
-          flex: 1,
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: 12,
           paddingHorizontal: 16,
         }}>
-        <View
+        <TextInput
+          value={text}
+          onChangeText={setText}
           style={{
-            flexDirection: 'row',
-            marginTop: 12,
-          }}>
-          <TextInput
-            value={text}
-            onChangeText={setText}
-            style={{
-              borderWidth: 1,
-              borderRadius: 8,
-              borderColor: 'gray',
-              padding: 8,
-              flex: 1,
-            }}
-          />
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'pink',
-              padding: 8,
-              borderRadius: 4,
-              marginLeft: 8,
-            }}
-            onPress={handleSaveSkill}>
-            <Text>Create</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={{marginTop: 12}}>
-          {listSkill?.map(skill => (
+            borderWidth: 1,
+            borderRadius: 8,
+            borderColor: 'gray',
+            padding: 8,
+            flex: 1,
+          }}
+        />
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'pink',
+            padding: 8,
+            borderRadius: 4,
+            marginLeft: 8,
+          }}
+          onPress={handleSaveSkill}>
+          <Text>Create</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={skills || []}
+        keyExtractor={item => String(item.id)}
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingBottom: 60,
+        }}
+        renderItem={({item}) => {
+          return (
             <View
-              key={skill.id}
               style={{
                 marginTop: 12,
                 borderRadius: 8,
@@ -89,11 +83,11 @@ const ChatScreen = ({navigation, skills}: Props) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}>
-              <Text>{skill.name}</Text>
+              <Text>{item.name}</Text>
             </View>
-          ))}
-        </View>
-      </ScrollView>
+          );
+        }}
+      />
     </SafeAreaView>
   );
 };
