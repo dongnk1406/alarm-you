@@ -112,7 +112,7 @@ We use Reactotron to check the debugger. If you want to use the Chrome debugger,
 
 - `hooks`: Global hooks, can be used anywhere in the apps.
 
-- `database`: WatermelonDB (A reactive database framework)
+- `database`: WatermelonDB (A reactive database framework). For view database using DB Browser fro SQLite, see [instruction](https://github.com/Nozbe/WatermelonDB/issues/105#issuecomment-453815987)
 
 - `navigation`: All the things related to navigation.
 
