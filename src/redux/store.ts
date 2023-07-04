@@ -1,13 +1,14 @@
-import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
   REGISTER,
+  REHYDRATE,
   persistStore,
 } from 'redux-persist';
+import Reactotron from '../../ReactotronConfig';
 import rootReducer from './rootReducer';
 
 const store = configureStore({
@@ -18,19 +19,10 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }).concat(),
+  // @ts-expect-error
+  enhancers: [Reactotron.createEnhancer()],
   devTools: __DEV__,
 });
-
-export type AppDispatch = typeof store.dispatch;
-
-export type RootState = ReturnType<typeof store.getState>;
-
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
 
 export const persistor = persistStore(store);
 

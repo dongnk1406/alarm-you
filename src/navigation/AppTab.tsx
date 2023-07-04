@@ -1,7 +1,9 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ChatScreen, HomeScreen} from 'src/containers';
-const Tab = createBottomTabNavigator();
+import {BottomTabsParamList} from './types';
+
+const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
 export const AppTab = () => {
   return (
