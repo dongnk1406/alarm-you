@@ -9,12 +9,14 @@
     "start": "react-native start",
     "test": "jest",
     "format": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --write",
-    "pod": "react-native setup-ios-permissions && cd ios && pod install && cd ..",
-    "android-clean": "cd android && ./gradlew clean && cd ..",
+    "pod": "react-native setup-ios-permissions && cd ios && bundle exec pod install && cd ..",
+    "android-clean": "rm -rf android/build && cd android && ./gradlew clean && cd ..",
     "android-build-apk-develop": "rm -rf build && rm -rf android/build && cd android && ./gradlew assembleDevRelease && cd ..",
     "adb-reactotron": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
     "prepare": "husky install",
-    "clean-all": "yarn clean && rm -rf node_modules && rm -rf ios/Pods && rm -rf vendor && bundle install && yarn install && cd ios && bundle exec pod install && cd -"
+    "bootstrap": "yarn install && bundle install && yarn pod",
+    "clean": "watchman watch-del-all && yarn cache clean && rm -rf ios/build && pod cache clean --all && yarn android-clean",
+    "clean-all": "yarn clean && rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock && rm -rf ios/Podfile.lock && rm -rf ios/Pods && rm -rf vendor"
   },
   "dependencies": {
     "@notifee/react-native": "^7.7.1",
@@ -27,6 +29,7 @@
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
+    "@reduxjs/toolkit": "^1.9.5",
     "@shopify/restyle": "^2.4.2",
     "axios": "^1.4.0",
     "i18next": "^23.1.0",
@@ -49,7 +52,9 @@
     "react-native-size-matters": "^0.4.0",
     "react-native-toast-message": "^2.1.6",
     "react-native-uuid": "^2.0.1",
-    "react-native-vector-icons": "^9.2.0"
+    "react-native-vector-icons": "^9.2.0",
+    "react-redux": "^8.1.1",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -79,6 +84,7 @@
     "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
     "reactotron-react-native": "^5.0.3",
+    "reactotron-redux": "^3.1.3",
     "typescript": "4.8.4"
   },
   "engines": {

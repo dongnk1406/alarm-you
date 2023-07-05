@@ -11,8 +11,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import uuid from 'react-native-uuid';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
+import {useAppDispatch} from 'src/redux/hooks';
+import {setSignOut, setUserToken} from 'src/redux/slices';
 import permission from 'src/utils/permission';
 
 const HomeScreen = () => {
@@ -22,6 +25,8 @@ const HomeScreen = () => {
   const [type, setType] = useState<string>('soft');
   const [listSkill, setListSkill] = useState<SkillsModel[]>([]);
   const [currentSkill, setCurrentSkill] = useState<SkillsModel | undefined>();
+
+  const dispatch = useAppDispatch();
 
   const handleSaveSkill = async () => {
     if (currentSkill?.id) {
@@ -65,7 +70,14 @@ const HomeScreen = () => {
     fetchData();
   }, [type]);
 
-  const handleSignOut = () => {};
+  const onChangeToken = () => {
+    const token = uuid.v4().toString();
+    dispatch(setUserToken(token));
+  };
+
+  const handleSignOut = () => {
+    dispatch(setSignOut(null));
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -82,6 +94,16 @@ const HomeScreen = () => {
             }}
           />
         }>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'orange',
+            padding: 8,
+            borderRadius: 4,
+            marginTop: 12,
+          }}
+          onPress={onChangeToken}>
+          <Text>Change token</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={{
             backgroundColor: 'orange',

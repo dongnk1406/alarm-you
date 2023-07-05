@@ -1,14 +1,19 @@
 import React, {useState} from 'react';
-import {StyleProp, View} from 'react-native';
-import FastImage, {FastImageProps, ImageStyle} from 'react-native-fast-image';
+import {View} from 'react-native';
+import FastImage, {FastImageProps} from 'react-native-fast-image';
 
 interface IProps extends FastImageProps {
   renderSkeletonLoading?: () => React.ReactElement;
-  style?: StyleProp<ImageStyle>;
 }
 
-const StyledImage = ({renderSkeletonLoading, style, ...props}: IProps) => {
+const StyledImage = ({
+  renderSkeletonLoading,
+  source,
+  style,
+  ...props
+}: IProps) => {
   const [loaded, setLoaded] = useState<boolean>(false);
+  const [error, setError] = useState(false);
 
   const renderImageLoading = () => {
     return (
@@ -22,14 +27,17 @@ const StyledImage = ({renderSkeletonLoading, style, ...props}: IProps) => {
     );
   };
 
-  const onLoaded = () => {
-    setLoaded(true);
-  };
-
   return (
     <View style={style}>
       {!loaded && renderImageLoading()}
-      <FastImage onLoad={onLoaded} style={style} {...props} />
+
+      <FastImage
+        {...props}
+        onLoad={() => setLoaded(true)}
+        onError={() => setError(true)}
+        style={style}
+        source={error ? undefined : undefined}
+      />
     </View>
   );
 };

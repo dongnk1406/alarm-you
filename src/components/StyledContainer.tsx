@@ -1,20 +1,20 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {StyledView} from './StyledView';
-import {StyledHeader} from './StyledHeader';
+import StyledHeader, {IHeaderProps} from './StyledHeader';
+import StyledView from './StyledView';
 
 interface Props {
   /**
    * Used to show or hide header. If withHeader = true, children should not wrap by SafeAreaView
    */
-  withHeader?: boolean;
   children: React.ReactNode;
+  renderHeader?: () => React.ReactNode;
 }
 
-const StyledContainer = ({withHeader = true, children}: Props) => {
+const StyledContainer = ({renderHeader, children}: Props) => {
   return (
     <StyledView style={styles.container}>
-      {withHeader && <StyledHeader />}
+      {renderHeader && renderHeader()}
       {children}
     </StyledView>
   );
