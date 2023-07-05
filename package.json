@@ -14,7 +14,7 @@
     "android-build-apk-develop": "rm -rf build && rm -rf android/build && cd android && ./gradlew assembleDevRelease && cd ..",
     "adb-reactotron": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
     "prepare": "husky install",
-    "setup": "yarn install && bundle install && yarn pod",
+    "bootstrap": "yarn install && bundle install && yarn pod",
     "clean": "watchman watch-del-all && yarn cache clean && rm -rf ios/build && pod cache clean --all && yarn android-clean",
     "clean-all": "yarn clean && rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock && rm -rf ios/Podfile.lock && rm -rf ios/Pods && rm -rf vendor"
   },

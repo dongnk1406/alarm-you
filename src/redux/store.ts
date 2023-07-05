@@ -19,8 +19,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }).concat(),
-  // @ts-expect-error
-  enhancers: [Reactotron.createEnhancer()],
+  enhancers: [Reactotron.createEnhancer!()],
   devTools: __DEV__,
 });
 
