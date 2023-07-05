@@ -1,6 +1,7 @@
+import {BottomSheetBackdrop, BottomSheetModal} from '@gorhom/bottom-sheet';
 import {Q} from '@nozbe/watermelondb';
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
   RefreshControl,
@@ -17,10 +18,13 @@ import {SkillsModel} from 'src/database/models';
 import {useAppDispatch} from 'src/redux/hooks';
 import {setSignOut, setUserToken} from 'src/redux/slices';
 import permission from 'src/utils/permission';
+import Metrics from 'src/assets/metrics';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {t} = useTranslation('translation');
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
   const [text, setText] = useState<string | undefined>('');
   const [type, setType] = useState<string>('soft');
   const [listSkill, setListSkill] = useState<SkillsModel[]>([]);
@@ -138,6 +142,18 @@ const HomeScreen = () => {
           onPress={handleSignOut}>
           <Text>Sign out</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'orange',
+            padding: 8,
+            borderRadius: 4,
+            marginTop: 12,
+          }}
+          onPress={() => {
+            bottomSheetModalRef.current?.present();
+          }}>
+          <Text>Open BottomSheet</Text>
+        </TouchableOpacity>
         <View
           style={{
             flexDirection: 'row',
@@ -231,6 +247,29 @@ const HomeScreen = () => {
           ))}
         </View>
       </ScrollView>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={['70%']}
+        onChange={() => {}}
+        detached
+        bottomInset={(Metrics.screenHeight * 0.3) / 2}
+        style={{marginHorizontal: 20}}
+        backdropComponent={props => (
+          <BottomSheetBackdrop
+            {...props}
+            disappearsOnIndex={-1}
+            appearsOnIndex={0}
+            opacity={0.8}
+          />
+        )}>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+          }}>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheetModal>
     </SafeAreaView>
   );
 };

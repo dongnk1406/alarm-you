@@ -8,7 +8,8 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {navigationRef} from 'src/navigation';
 import store, {persistor} from 'src/redux/store';
-import {lightTheme} from 'src/theme';
+import {LightTheme} from 'src/theme';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 const AppProvider = ({children}: PropsWithChildren) => {
   return (
@@ -16,9 +17,11 @@ const AppProvider = ({children}: PropsWithChildren) => {
       <Provider store={store}>
         <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
           <NavigationContainer ref={navigationRef}>
-            <SafeAreaProvider>
-              <ThemeProvider theme={lightTheme}>{children}</ThemeProvider>
-            </SafeAreaProvider>
+            <BottomSheetModalProvider>
+              <SafeAreaProvider>
+                <ThemeProvider theme={LightTheme}>{children}</ThemeProvider>
+              </SafeAreaProvider>
+            </BottomSheetModalProvider>
           </NavigationContainer>
         </PersistGate>
       </Provider>

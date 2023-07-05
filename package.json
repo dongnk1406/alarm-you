@@ -19,6 +19,7 @@
     "clean-all": "yarn clean && rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock && rm -rf ios/Podfile.lock && rm -rf ios/Pods && rm -rf vendor"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.4.7",
     "@notifee/react-native": "^7.7.1",
     "@nozbe/watermelondb": "^0.26.0",
     "@react-native-community/netinfo": "^9.3.10",

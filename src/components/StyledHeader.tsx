@@ -1,15 +1,20 @@
 import React from 'react';
 import StyledView from './StyledView';
 import StyledText from './StyledText';
-import {TextStyle} from 'react-native';
+import {FlatList, TextStyle, ViewStyle} from 'react-native';
 
 export interface IHeaderProps {
   title?: string;
   titleStyle?: TextStyle;
-  renderHeaderCenter?: () => React.ReactNode;
-  renderHeaderLeft?: () => React.ReactNode;
-  renderHeaderRight?: () => React.ReactNode;
+  subTitle?: string;
+  subTitleStyle?: TextStyle;
+  HeaderCenterComponent?: React.ElementType;
+  HeaderLefComponent?: React.ElementType;
+  HeaderRightComponent?: React.ElementType;
   isBack?: boolean;
+  onBack?: () => void;
+  inSafeArea?: boolean;
+  containerStyle?: ViewStyle;
 }
 
 const StyledHeader = ({title = ''}: IHeaderProps) => {
