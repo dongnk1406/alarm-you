@@ -58,6 +58,15 @@ export const shadow = {
 };
 
 export const LightTheme = createTheme({
+  breakpoints: {
+    phone: 0,
+    longPhone: {
+      width: 0,
+      height: 812,
+    },
+    tablet: 768,
+    largeTablet: 1024,
+  },
   colors: {
     ...palette,
     mainBackground: palette.lightGray,
@@ -67,18 +76,7 @@ export const LightTheme = createTheme({
     primaryCardText: palette.white,
     secondaryCardText: palette.black,
   },
-  fonts: {
-    font900: 'Roboto-Black',
-    font900Italic: 'Roboto-BlackItalic',
-    font700: 'Roboto-Bold',
-    font700Italic: 'Roboto-BoldItalic',
-    font500: 'Roboto-Medium',
-    font500Italic: 'Roboto-MediumItalic',
-    font400: 'Roboto-Regular',
-    font400Italic: 'Roboto-Regular',
-    font300: 'Roboto-Light',
-    font300Italic: 'Roboto-LightItalic',
-  },
+  fonts: config.fonts,
   spacing: config.spacings,
   textVariants: config.textVariants,
   cardVariants: {
@@ -93,6 +91,9 @@ export const LightTheme = createTheme({
     },
   },
   shadow: shadow,
+  whiteOpacity: (opacity: number) => `rgba(255, 255, 255, ${opacity})`,
+  blackOpacity: (opacity: number) => `rgba(0, 0, 0, ${opacity})`,
+  greenOpacity: (opacity: number) => `rgba(0, 255, 193, ${opacity})`,
 });
 
 export type Theme = typeof LightTheme;

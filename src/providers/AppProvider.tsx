@@ -8,10 +8,13 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {navigationRef} from 'src/navigation';
 import store, {persistor} from 'src/redux/store';
-import {LightTheme} from 'src/theme';
+import {DarkTheme, LightTheme} from 'src/theme';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 const AppProvider = ({children}: PropsWithChildren) => {
+  const isDarkTheme = store.getState().common.isDarkTheme;
+  console.log('isDarkTheme', isDarkTheme);
+  const theme = isDarkTheme ? DarkTheme : LightTheme;
   return (
     <GestureHandlerRootView style={styles.container}>
       <Provider store={store}>
@@ -19,7 +22,7 @@ const AppProvider = ({children}: PropsWithChildren) => {
           <NavigationContainer ref={navigationRef}>
             <BottomSheetModalProvider>
               <SafeAreaProvider>
-                <ThemeProvider theme={LightTheme}>{children}</ThemeProvider>
+                <ThemeProvider theme={theme}>{children}</ThemeProvider>
               </SafeAreaProvider>
             </BottomSheetModalProvider>
           </NavigationContainer>

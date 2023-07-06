@@ -13,17 +13,20 @@ import {
   View,
 } from 'react-native';
 import uuid from 'react-native-uuid';
+import reactotron from 'reactotron-react-native';
+import Metrics from 'src/assets/metrics';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
+import {useAppTheme} from 'src/hooks';
 import {useAppDispatch} from 'src/redux/hooks';
 import {setSignOut, setUserToken} from 'src/redux/slices';
 import permission from 'src/utils/permission';
-import Metrics from 'src/assets/metrics';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {t} = useTranslation('translation');
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const theme = useAppTheme();
 
   const [text, setText] = useState<string | undefined>('');
   const [type, setType] = useState<string>('soft');
