@@ -1,3 +1,5 @@
+import {s} from 'react-native-size-matters';
+
 export const config = {
   fonts: {
     font900: 'Roboto-Black',
@@ -12,15 +14,15 @@ export const config = {
     font300Italic: 'Roboto-LightItalic',
   },
   spacings: {
-    xs: 4,
-    s: 8,
-    m: 12,
-    l: 16,
-    xl: 20,
-    '2xl': 24,
-    '3xl': 28,
-    '4xl': 32,
-    '5xl': 36,
+    xs: s(4),
+    s: s(8),
+    m: s(12),
+    l: s(16),
+    xl: s(20),
+    '2xl': s(24),
+    '3xl': s(28),
+    '4xl': s(32),
+    '5xl': s(36),
   },
   textVariants: {
     default: {},

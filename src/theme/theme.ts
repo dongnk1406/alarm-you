@@ -75,8 +75,9 @@ export const LightTheme = createTheme({
     secondaryCardBackground: palette.white,
     primaryCardText: palette.white,
     secondaryCardText: palette.black,
+    transparent: 'transparent',
   },
-  fonts: config.fonts,
+  fontFamily: config.fonts,
   spacing: config.spacings,
   textVariants: config.textVariants,
   cardVariants: {
@@ -102,7 +103,7 @@ export const DarkTheme: Theme = {
   ...LightTheme,
   colors: {
     ...LightTheme.colors,
-    mainBackground: palette.black,
+    mainBackground: palette['neutral-black'],
     mainForeground: palette.white,
     secondaryCardBackground: palette.darkGray,
     secondaryCardText: palette.white,

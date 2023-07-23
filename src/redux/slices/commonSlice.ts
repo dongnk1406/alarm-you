@@ -31,4 +31,4 @@ export const commonReducer = persistReducer(
   commonSlice.reducer,
 );
 
-export const {updateLanguage} = commonSlice.actions;
+export const {updateLanguage, setDarkTheme} = commonSlice.actions;

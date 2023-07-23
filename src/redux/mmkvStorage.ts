@@ -1,5 +1,5 @@
-import {PersistConfig, Storage} from 'redux-persist';
 import {MMKV} from 'react-native-mmkv';
+import {Storage} from 'redux-persist';
 
 const storage = new MMKV();
 
@@ -18,7 +18,7 @@ const mmkvStorage: Storage = {
   },
 };
 
-export const persistConfig = (key: string, params?: PersistConfig<any>) => ({
+export const persistConfig = (key: string, params?: any) => ({
   key,
   version: 1,
   storage: mmkvStorage,

@@ -1,18 +1,15 @@
 import withObservables from '@nozbe/with-observables';
+import {useFocusEffect} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {
-  FlatList,
-  SafeAreaView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import reactotron from 'reactotron-react-native';
+import {StyledView} from 'src/components/base';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
-import {AllStackParamList} from 'src/navigation/types';
+import {useAppTheme} from 'src/hooks';
+import {AllStackParamList} from 'src/navigation/config/types';
 
 type Props = NativeStackScreenProps<AllStackParamList, 'MapScreen'> & {
   skills: SkillsModel[];
@@ -20,6 +17,13 @@ type Props = NativeStackScreenProps<AllStackParamList, 'MapScreen'> & {
 const ChatScreen = ({navigation, skills}: Props) => {
   const {t} = useTranslation('translation');
   const [text, setText] = useState<string | undefined>('');
+  const {colors} = useAppTheme();
+
+  useFocusEffect(
+    useCallback(() => {
+      reactotron.log('colors', colors.mainBackground);
+    }, [colors]),
+  );
 
   const handleSaveSkill = async () => {
     await database.write(async () => {
@@ -35,8 +39,11 @@ const ChatScreen = ({navigation, skills}: Props) => {
   const handleSignOut = () => {};
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View
+    <StyledView
+      style={{flex: 1}}
+      marginTop={'4xl'}
+      backgroundColor={'mainBackground'}>
+      <StyledView
         style={{
           flexDirection: 'row',
           marginTop: 12,
@@ -63,7 +70,7 @@ const ChatScreen = ({navigation, skills}: Props) => {
           onPress={handleSaveSkill}>
           <Text>Create</Text>
         </TouchableOpacity>
-      </View>
+      </StyledView>
       <FlatList
         data={skills || []}
         keyExtractor={item => String(item.id)}
@@ -88,7 +95,7 @@ const ChatScreen = ({navigation, skills}: Props) => {
           );
         }}
       />
-    </SafeAreaView>
+    </StyledView>
   );
 };
 

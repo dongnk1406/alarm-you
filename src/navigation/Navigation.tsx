@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {AppStacks} from './AppStacks';
 import {GuestStacks} from './GuestStacks';
-import {AllStackParamList} from './types';
+import {AllStackParamList} from './config/types';
 import {useAppSelector} from 'src/redux/hooks';
 
 export const Stack = createNativeStackNavigator<AllStackParamList>();

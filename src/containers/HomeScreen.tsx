@@ -13,19 +13,20 @@ import {
   View,
 } from 'react-native';
 import uuid from 'react-native-uuid';
-import reactotron from 'reactotron-react-native';
 import Metrics from 'src/assets/metrics';
+import {StyledText, StyledTouchable, StyledView} from 'src/components/base';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
 import {useAppTheme} from 'src/hooks';
-import {useAppDispatch} from 'src/redux/hooks';
-import {setSignOut, setUserToken} from 'src/redux/slices';
+import {useAppDispatch, useAppSelector} from 'src/redux/hooks';
+import {setDarkTheme, setSignOut, setUserToken} from 'src/redux/slices';
 import permission from 'src/utils/permission';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {t} = useTranslation('translation');
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const isDarkTheme = useAppSelector(state => state.common.isDarkTheme);
   const theme = useAppTheme();
 
   const [text, setText] = useState<string | undefined>('');
@@ -157,6 +158,20 @@ const HomeScreen = () => {
           }}>
           <Text>Open BottomSheet</Text>
         </TouchableOpacity>
+
+        <StyledTouchable
+          activeScale={0.96}
+          style={{
+            backgroundColor: theme.colors.mainBackground,
+            padding: 8,
+            borderRadius: 4,
+            marginTop: 12,
+            ...theme.shadow.low,
+          }}
+          onPress={() => dispatch(setDarkTheme(!isDarkTheme))}>
+          <Text>Change theme</Text>
+        </StyledTouchable>
+
         <View
           style={{
             flexDirection: 'row',
@@ -169,8 +184,9 @@ const HomeScreen = () => {
               borderWidth: 1,
               borderRadius: 8,
               borderColor: 'gray',
-              padding: 8,
+              padding: 0,
               flex: 1,
+              alignSelf: 'flex-start',
             }}
           />
           <TouchableOpacity
@@ -185,8 +201,12 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={{flexDirection: 'row', marginTop: 12}}>
-          <TouchableOpacity
+        <StyledView
+          flexDirection={'row'}
+          marginTop={'m'}
+          backgroundColor={'background'}>
+          <StyledTouchable
+            activeScale={0.8}
             style={{
               backgroundColor: type === 'soft' ? 'orange' : 'pink',
               padding: 8,
@@ -194,8 +214,9 @@ const HomeScreen = () => {
             }}
             onPress={() => setType('soft')}>
             <Text>Soft</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </StyledTouchable>
+          <StyledTouchable
+            activeScale={0.9}
             style={{
               backgroundColor: type === 'tech' ? 'orange' : 'pink',
               padding: 8,
@@ -203,9 +224,9 @@ const HomeScreen = () => {
               marginLeft: 8,
             }}
             onPress={() => setType('tech')}>
-            <Text>Technical</Text>
-          </TouchableOpacity>
-        </View>
+            <StyledText>Hello</StyledText>
+          </StyledTouchable>
+        </StyledView>
 
         <View style={{marginTop: 12}}>
           {listSkill.map(skill => (
@@ -255,7 +276,7 @@ const HomeScreen = () => {
         snapPoints={['70%']}
         onChange={() => {}}
         detached
-        bottomInset={(Metrics.screenHeight * 0.3) / 2}
+        bottomInset={(Metrics.screenHeight * 0.3) / 2 + Metrics.topInset}
         style={{marginHorizontal: 20}}
         backdropComponent={props => (
           <BottomSheetBackdrop

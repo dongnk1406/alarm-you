@@ -13,7 +13,6 @@ import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 const AppProvider = ({children}: PropsWithChildren) => {
   const isDarkTheme = store.getState().common.isDarkTheme;
-  console.log('isDarkTheme', isDarkTheme);
   const theme = isDarkTheme ? DarkTheme : LightTheme;
   return (
     <GestureHandlerRootView style={styles.container}>
