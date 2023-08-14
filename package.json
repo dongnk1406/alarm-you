@@ -11,7 +11,7 @@
     "format": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --write",
     "pod": "react-native setup-ios-permissions && cd ios && bundle exec pod install && cd ..",
     "android-clean": "rm -rf android/build && cd android && ./gradlew clean && cd ..",
-    "android-build-apk-develop": "rm -rf build && rm -rf android/build && cd android && ./gradlew assembleRelease && cd ..",
+    "android-build-apk-develop": "rm -rf build && rm -rf android/build && cd android && ./gradlew clean && ./gradlew assembleRelease && cd ..",
     "adb-reactotron": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
     "prepare": "husky install",
     "bootstrap": "yarn install && bundle install && yarn pod",
@@ -19,13 +19,13 @@
     "clean-all": "yarn clean && rm -rf node_modules && rm -rf package-lock.json && rm -rf yarn.lock && rm -rf ios/Podfile.lock && rm -rf ios/Pods && rm -rf vendor",
     "prepare-build-ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios",
     "cp-android": "appcenter codepush release-react -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-android --description $changelog -d Staging -m --description 'Modified the header color' ",
-    "cp-android:staging": "appcenter codepush release-react -a dong.nguyen-adamo.software/alram-you -m --description 'Modified the header color' ",
+    "cp-android:staging": "appcenter codepush release-react -a dong.nguyen-adamo.software/alram-you -m --description 'Staging: Modified home button color'",
     "cp-android:rb": "appcenter codepush rollback -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-android Production",
     "cp-android:rb-staging": "appcenter codepush rollback -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-android Staging",
     "cp-ios": "appcenter codepush release-react -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-ios --description $changelog -d Production --plist-file 'ios/Trevo/Info.plist'",
     "cp-ios:staging": "appcenter codepush release-react -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-ios  --description $changelog -d Staging --plist-file 'ios/Trevo/Info.plist'",
     "cp-ios:rb": "appcenter codepush rollback -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-ios Production",
-    "cp-ios:rb-staging": "appcenter codepush rollback -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-ios Staging"
+    "cp-ios:rb-staging": "appcenter codepush rollback -a dong.nguyen-adamo.software/alram-you Staging"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.7",
@@ -50,6 +50,7 @@
     "react-native": "0.72.1",
     "react-native-code-push": "^8.0.2",
     "react-native-config": "^1.5.1",
+    "react-native-device-info": "^10.8.0",
     "react-native-fast-image": "^8.6.3",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "^2.12.0",

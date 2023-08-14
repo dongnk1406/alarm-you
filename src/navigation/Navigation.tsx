@@ -11,9 +11,14 @@ export const navigationRef = createNavigationContainerRef();
 
 export const Navigation = () => {
   const token = useAppSelector(state => state.auth.userToken);
+
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{
+        headerShown: false,
+        animation: 'slide_from_right',
+        navigationBarHidden: true,
+      }}
       initialRouteName="SignInScreen">
       {token ? AppStacks() : GuestStacks()}
     </Stack.Navigator>

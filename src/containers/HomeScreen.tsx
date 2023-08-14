@@ -20,6 +20,7 @@ import {SkillsModel} from 'src/database/models';
 import {useAppTheme} from 'src/hooks';
 import {useAppDispatch, useAppSelector} from 'src/redux/hooks';
 import {setDarkTheme, setSignOut, setUserToken} from 'src/redux/slices';
+import {appVersion} from 'src/shared/configs';
 import permission from 'src/utils/permission';
 
 const HomeScreen = () => {
@@ -102,9 +103,10 @@ const HomeScreen = () => {
             }}
           />
         }>
+        <StyledText style={{color: 'red'}}>{appVersion}</StyledText>
         <TouchableOpacity
           style={{
-            backgroundColor: 'orange',
+            backgroundColor: 'pink',
             padding: 8,
             borderRadius: 4,
             marginTop: 12,
@@ -114,7 +116,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor: 'orange',
+            backgroundColor: 'pink',
             padding: 8,
             borderRadius: 4,
             marginTop: 12,
@@ -126,7 +128,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor: 'orange',
+            backgroundColor: 'pink',
             padding: 8,
             borderRadius: 4,
             marginTop: 12,

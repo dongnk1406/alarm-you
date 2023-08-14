@@ -3,17 +3,17 @@ import {navigationRef} from './Navigation';
 
 export function setTopLevelNavigator(navigatorRef: any) {}
 
-export function navigate(routeName: any, params?: any) {
+export function navigate(name: any, params?: any) {
   navigationRef.dispatch(
     CommonActions.navigate({
-      name: routeName,
+      name,
       params,
     }),
   );
 }
 
 export const replace = (name: string, params?: any) => {
-  if (navigationRef.current && navigationRef.current) {
+  if (navigationRef.current && navigationRef.isReady()) {
     // Perform navigation if the app has mounted
     // navigationRef.current.navigate(name, params);
     // Keyboard.dismiss()
@@ -35,7 +35,7 @@ export function pop(value: any) {
 }
 
 export const push = (name: string, params?: any) => {
-  if (navigationRef.current && navigationRef.current) {
+  if (navigationRef.current && navigationRef.isReady()) {
     // Perform navigation if the app has mounted
     // navigationRef.current.navigate(name, params);
     // Keyboard.dismiss()
@@ -46,7 +46,19 @@ export const push = (name: string, params?: any) => {
   }
 };
 
-export const NavigationUtils = {
+export const popToTop = () => {
+  if (navigationRef.current && navigationRef.isReady()) {
+    // Perform navigation if the app has mounted
+    // navigationRef.current.navigate(name, params);
+    // Keyboard.dismiss()
+    navigationRef.current?.dispatch(StackActions.popToTop());
+  } else {
+    // You can decide what to do if the app hasn't mounted
+    // You can ignore this, or add these actions to a queue you can call later
+  }
+};
+
+export const NavigationHelper = {
   navigate,
   setTopLevelNavigator,
   goBack,

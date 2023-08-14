@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CODE_PUSH = Config.MODE === 'LIVE';
+const CODE_PUSH = Config.MODE === 'DEVELOP';
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
   mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
@@ -64,4 +64,4 @@ const codePushOptions = {
 
 const _App = CODE_PUSH ? codePush(codePushOptions)(withCodePushHOC(App)) : App;
 
-export default App;
+export default _App;
