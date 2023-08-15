@@ -106,7 +106,7 @@ const HomeScreen = () => {
         <StyledText style={{color: 'red'}}>{appVersion}</StyledText>
         <TouchableOpacity
           style={{
-            backgroundColor: 'pink',
+            backgroundColor: 'purple',
             padding: 8,
             borderRadius: 4,
             marginTop: 12,
@@ -116,7 +116,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor: 'pink',
+            backgroundColor: 'purple',
             padding: 8,
             borderRadius: 4,
             marginTop: 12,
@@ -128,7 +128,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor: 'pink',
+            backgroundColor: 'purple',
             padding: 8,
             borderRadius: 4,
             marginTop: 12,
@@ -203,10 +203,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <StyledView
-          flexDirection={'row'}
-          marginTop={'m'}
-          backgroundColor={'background'}>
+        <StyledView flexDirection={'row'} marginTop={'m'}>
           <StyledTouchable
             activeScale={0.8}
             style={{

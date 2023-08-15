@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {Platform, StyleSheet, Text, UIManager, View} from 'react-native';
+import {Modal, Platform, StyleSheet, Text, UIManager, View} from 'react-native';
 import codePush from 'react-native-code-push';
 import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
-import {StyledDisconnect} from 'src/components/base';
+import {StyledDisconnect, StyledText, StyledView} from 'src/components/base';
 import {Navigation} from 'src/navigation';
 import AppProvider from 'src/providers';
 import {withCodePushHOC} from 'src/services/codepush';
@@ -27,6 +27,7 @@ function App(): JSX.Element {
       <Navigation />
       <Toast />
       <StyledDisconnect />
+
       {Config.MODE !== 'LIVE' && (
         <View style={styles.mode}>
           <Text style={{color: 'black'}}>{Config.MODE}</Text>

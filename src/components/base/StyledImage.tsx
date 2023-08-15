@@ -36,7 +36,7 @@ const StyledImage = ({
         onLoad={() => setLoaded(true)}
         onError={() => setError(true)}
         style={style}
-        source={error ? undefined : undefined}
+        source={error ? undefined : source}
       />
     </View>
   );

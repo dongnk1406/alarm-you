@@ -1,5 +1,6 @@
 import React from 'react';
 import CodePush, {DownloadProgress} from 'react-native-code-push';
+import CodePushDialog from './CodePushDialog';
 
 interface State {
   updateVisible: boolean;
@@ -73,7 +74,12 @@ export const withCodePushHOC = (CodePushComponent: React.ElementType) => {
       return (
         <React.Fragment>
           <CodePushComponent />
-          {/* <CodePushAlert /> */}
+          <CodePushDialog
+            visible={this.state.updateVisible}
+            onRestart={this.onRestart}
+            onHideModal={this.onHideModal}
+            messages={this.state.description?.split('\n')}
+          />
         </React.Fragment>
       );
     }
