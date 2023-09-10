@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import StyledHeader, {IHeaderProps} from './StyledHeader';
+import {StyleSheet} from 'react-native';
 import StyledView from './StyledView';
 
 interface Props {
@@ -9,6 +8,7 @@ interface Props {
    */
   children: React.ReactNode;
   renderHeader?: () => React.ReactNode;
+  withSafeArea: boolean;
 }
 
 const StyledContainer = ({renderHeader, children}: Props) => {

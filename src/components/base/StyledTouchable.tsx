@@ -1,8 +1,8 @@
-import {createBox} from '@shopify/restyle';
 import {throttle} from 'lodash';
-import React, {FunctionComponent, memo, useMemo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {
   ColorValue,
+  GestureResponderEvent,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
@@ -13,12 +13,11 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {Theme} from 'src/theme';
 
 interface StyledTouchableProps extends TouchableOpacityProps {
   /**
    * @props Wait The number of milliseconds to throttle invocations to.
-   * Defaults to 500ms
+   * Defaults to 300ms
    */
   throttleTime?: number;
 
@@ -29,28 +28,24 @@ interface StyledTouchableProps extends TouchableOpacityProps {
   activeScale?: number;
 
   /**
-   * @props Determines what the opacity of the wrapped view should be when touch is active.
-   * Defaults to 1
-   */
-  activeOpacity?: number;
-
-  /**
    * @props Underlay color when the touch is start
-   * Defaults to 'transparent'
    */
-  activeUnderlayColor?: ColorValue;
+  underlayColor?: ColorValue;
 }
 
-const BaseTouchable = createBox<Theme, TouchableOpacityProps>(TouchableOpacity);
+const AnimatedTouchableOpacity =
+  Animated.createAnimatedComponent(TouchableOpacity);
 
-const StyledTouchable: FunctionComponent<StyledTouchableProps> = ({
+const StyledTouchable = ({
   children,
-  throttleTime = 500,
-  onPress = () => {},
+  throttleTime = 300,
   activeScale = 1,
-  activeOpacity = 1,
-  activeUnderlayColor = 'transparent',
+  underlayColor,
   style,
+  onPress = () => {},
+  onPressIn = () => {},
+  onPressOut = () => {},
+  ...props
 }: StyledTouchableProps) => {
   const scaleAnimated = useSharedValue(0);
   const underlayColorAnimated = useSharedValue(0);
@@ -68,49 +63,51 @@ const StyledTouchable: FunctionComponent<StyledTouchableProps> = ({
 
   // underlay color animation
   const underlayColorAnimatedStyle = useAnimatedStyle(() => {
+    const backgroundColor: ColorValue = underlayColor
+      ? underlayColor
+      : style?.backgroundColor || 'transparent';
+
     return {
       backgroundColor: underlayColorAnimated.value
-        ? activeUnderlayColor
-        : 'transparent',
+        ? backgroundColor
+        : style?.backgroundColor || 'transparent',
     };
   });
 
   const handlePress = throttle(onPress, throttleTime, {trailing: false});
-  const handlePressIn = () => {
+
+  const handlePressIn = (event: GestureResponderEvent) => {
     scaleAnimated.value = withTiming(1, {duration: 250});
     underlayColorAnimated.value = 1;
+    onPressIn?.(event);
   };
-  const handlePressOut = () => {
+
+  const handlePressOut = (event: GestureResponderEvent) => {
     scaleAnimated.value = withTiming(0, {duration: 250});
     underlayColorAnimated.value = 0;
+    onPressOut?.(event);
   };
 
   const _style = useMemo(() => {
     let styles = [style];
+    styles = styles.concat(underlayColorAnimatedStyle);
+
     if (activeScale !== 1) {
       styles = styles.concat(scaleAnimatedStyle);
     }
-    if (activeUnderlayColor !== 'transparent') {
-      styles = styles.concat(underlayColorAnimatedStyle);
-    }
 
     return styles;
-  }, [
-    activeScale,
-    activeUnderlayColor,
-    scaleAnimatedStyle,
-    style,
-    underlayColorAnimatedStyle,
-  ]);
+  }, [activeScale, scaleAnimatedStyle, style, underlayColorAnimatedStyle]);
 
   return (
-    <BaseTouchable
-      activeOpacity={activeOpacity}
+    <AnimatedTouchableOpacity
       onPress={handlePress}
       onPressIn={handlePressIn}
-      onPressOut={handlePressOut}>
-      <Animated.View style={_style}>{children}</Animated.View>
-    </BaseTouchable>
+      onPressOut={handlePressOut}
+      style={_style}
+      {...props}>
+      {children}
+    </AnimatedTouchableOpacity>
   );
 };
 

@@ -1,2 +1,2 @@
-export * from './Navigation';
-export * from './NavigationHelper';
+export * from './AppNavigation';
+export * from './NavigationHelpers';

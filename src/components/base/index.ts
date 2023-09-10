@@ -1,5 +1,5 @@
 import StyledContainer from './StyledContainer';
-import StyledDisconnect from './StyledDisconnect';
+import StyledDisconnect from '../common/AppDisconnect';
 import StyledHeader from './StyledHeader';
 import StyledImage from './StyledImage';
 import StyledText from './StyledText';

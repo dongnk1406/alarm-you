@@ -9,7 +9,6 @@ import {
   ScrollView,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import uuid from 'react-native-uuid';
@@ -19,7 +18,7 @@ import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
 import {useAppTheme} from 'src/hooks';
 import {useAppDispatch, useAppSelector} from 'src/redux/hooks';
-import {setDarkTheme, setSignOut, setUserToken} from 'src/redux/slices';
+import {setSignOut, setUserToken} from 'src/redux/slices';
 import {appVersion} from 'src/shared/configs';
 import permission from 'src/utils/permission';
 
@@ -104,7 +103,7 @@ const HomeScreen = () => {
           />
         }>
         <StyledText style={{color: 'red'}}>{appVersion}</StyledText>
-        <TouchableOpacity
+        <StyledTouchable
           style={{
             backgroundColor: 'purple',
             padding: 8,
@@ -113,8 +112,8 @@ const HomeScreen = () => {
           }}
           onPress={onChangeToken}>
           <Text>Change token</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </StyledTouchable>
+        <StyledTouchable
           style={{
             backgroundColor: 'purple',
             padding: 8,
@@ -125,8 +124,8 @@ const HomeScreen = () => {
             const hasPermission = await permission.requestPhotoLibrary();
           }}>
           <Text>Open gallery</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </StyledTouchable>
+        <StyledTouchable
           style={{
             backgroundColor: 'purple',
             padding: 8,
@@ -137,8 +136,8 @@ const HomeScreen = () => {
             navigation.navigate('MapScreen');
           }}>
           <Text>{t('common.map')}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </StyledTouchable>
+        <StyledTouchable
           style={{
             backgroundColor: 'orange',
             padding: 8,
@@ -147,8 +146,8 @@ const HomeScreen = () => {
           }}
           onPress={handleSignOut}>
           <Text>Sign out</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </StyledTouchable>
+        <StyledTouchable
           style={{
             backgroundColor: 'orange',
             padding: 8,
@@ -159,19 +158,18 @@ const HomeScreen = () => {
             bottomSheetModalRef.current?.present();
           }}>
           <Text>Open BottomSheet</Text>
-        </TouchableOpacity>
+        </StyledTouchable>
 
         <StyledTouchable
-          activeScale={0.96}
+          activeOpacity={1}
+          underlayColor={'red'}
           style={{
-            backgroundColor: theme.colors.mainBackground,
             padding: 8,
             borderRadius: 4,
             marginTop: 12,
-            ...theme.shadow.low,
-          }}
-          onPress={() => dispatch(setDarkTheme(!isDarkTheme))}>
-          <Text>Change theme</Text>
+            backgroundColor: 'orange',
+          }}>
+          <Text>TouchableHighlight</Text>
         </StyledTouchable>
 
         <View
@@ -186,12 +184,12 @@ const HomeScreen = () => {
               borderWidth: 1,
               borderRadius: 8,
               borderColor: 'gray',
-              padding: 0,
+              padding: 8,
               flex: 1,
               alignSelf: 'flex-start',
             }}
           />
-          <TouchableOpacity
+          <StyledTouchable
             style={{
               backgroundColor: 'pink',
               padding: 8,
@@ -200,7 +198,7 @@ const HomeScreen = () => {
             }}
             onPress={handleSaveSkill}>
             <Text>{currentSkill?.id ? 'Update' : 'Create'}</Text>
-          </TouchableOpacity>
+          </StyledTouchable>
         </View>
 
         <StyledView flexDirection={'row'} marginTop={'m'}>
@@ -229,7 +227,7 @@ const HomeScreen = () => {
 
         <View style={{marginTop: 12}}>
           {listSkill.map(skill => (
-            <TouchableOpacity
+            <StyledTouchable
               key={skill.id}
               style={{
                 marginTop: 12,
@@ -242,7 +240,7 @@ const HomeScreen = () => {
               }}>
               <Text>{skill.name}</Text>
               <View style={{flexDirection: 'row'}}>
-                <TouchableOpacity
+                <StyledTouchable
                   style={{
                     marginLeft: 8,
                     backgroundColor: 'orange',
@@ -254,8 +252,8 @@ const HomeScreen = () => {
                     setText(skill.name);
                   }}>
                   <Text>Edit</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </StyledTouchable>
+                <StyledTouchable
                   style={{
                     marginLeft: 8,
                     backgroundColor: 'orange',
@@ -264,9 +262,9 @@ const HomeScreen = () => {
                   }}
                   onPress={() => handleRemoveSkill(skill)}>
                   <Text>Delete</Text>
-                </TouchableOpacity>
+                </StyledTouchable>
               </View>
-            </TouchableOpacity>
+            </StyledTouchable>
           ))}
         </View>
       </ScrollView>

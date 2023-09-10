@@ -1,4 +1,5 @@
 import {s} from 'react-native-size-matters';
+import {FontSizes} from './sizes';
 
 export const config = {
   fonts: {
@@ -14,15 +15,15 @@ export const config = {
     font300Italic: 'Roboto-LightItalic',
   },
   spacings: {
-    xs: s(4),
-    s: s(8),
-    m: s(12),
-    l: s(16),
-    xl: s(20),
-    '2xl': s(24),
-    '3xl': s(28),
-    '4xl': s(32),
-    '5xl': s(36),
+    xs: FontSizes.FONT_4,
+    s: FontSizes.FONT_8,
+    m: FontSizes.FONT_12,
+    l: FontSizes.FONT_16,
+    xl: FontSizes.FONT_20,
+    '2xl': FontSizes.FONT_24,
+    '3xl': FontSizes.FONT_28,
+    '4xl': FontSizes.FONT_32,
+    '5xl': FontSizes.FONT_36,
   },
   textVariants: {
     default: {},

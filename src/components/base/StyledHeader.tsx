@@ -13,7 +13,6 @@ export interface IHeaderProps {
   HeaderRightComponent?: React.ElementType;
   isBack?: boolean;
   onBack?: () => void;
-  inSafeArea?: boolean;
   containerStyle?: ViewStyle;
 }
 

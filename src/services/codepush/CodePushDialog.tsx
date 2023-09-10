@@ -31,20 +31,18 @@ const CodePushDialog = ({
             borderRadius: 16,
             padding: 16,
           }}>
-          <Text>Codepush Update</Text>
-          {messages && messages.map(mes => <Text>{mes}</Text>)}
-          <StyledView flexDirection={'row'}>
-            <StyledTouchable
-              activeOpacity={0.5}
-              activeUnderlayColor={theme.blackOpacity(0.5)}
-              onPress={onHideModal}>
-              <Text>Later</Text>
+          <Text style={{color: 'black'}}>Codepush Update</Text>
+          {messages &&
+            messages.map(mes => <Text style={{color: 'black'}}>{mes}</Text>)}
+          <StyledView flexDirection={'row'} justifyContent={'flex-end'}>
+            <StyledTouchable activeOpacity={0.5} onPress={onHideModal}>
+              <Text style={{color: 'black'}}>Later</Text>
             </StyledTouchable>
             <StyledTouchable
               activeOpacity={0.5}
-              activeUnderlayColor={theme.blackOpacity(0.5)}
-              onPress={onRestart}>
-              <Text>Restart</Text>
+              onPress={onRestart}
+              style={{marginLeft: 12}}>
+              <Text style={{color: 'black'}}>Restart</Text>
             </StyledTouchable>
           </StyledView>
         </StyledView>

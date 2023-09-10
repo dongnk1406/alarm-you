@@ -1,5 +1,5 @@
 import {CommonActions, StackActions} from '@react-navigation/native';
-import {navigationRef} from './Navigation';
+import {navigationRef} from './AppNavigation';
 
 export function setTopLevelNavigator(navigatorRef: any) {}
 
@@ -58,7 +58,7 @@ export const popToTop = () => {
   }
 };
 
-export const NavigationHelper = {
+export const NavigationHelpers = {
   navigate,
   setTopLevelNavigator,
   goBack,

@@ -1,18 +1,15 @@
 import React, {useEffect} from 'react';
-import {Modal, Platform, StyleSheet, Text, UIManager, View} from 'react-native';
+import {Platform, StyleSheet, Text, UIManager, View} from 'react-native';
 import codePush from 'react-native-code-push';
 import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
-import {StyledDisconnect, StyledText, StyledView} from 'src/components/base';
-import {Navigation} from 'src/navigation';
+import {AppDisconnect} from 'src/components/common';
+import {AppNavigation} from 'src/navigation';
 import AppProvider from 'src/providers';
 import {withCodePushHOC} from 'src/services/codepush';
-import {useNotificationBoot} from 'src/services/notification';
 import 'src/utils/i18next';
 
 function App(): JSX.Element {
-  useNotificationBoot();
-
   useEffect(() => {
     if (
       Platform.OS === 'android' &&
@@ -24,9 +21,9 @@ function App(): JSX.Element {
 
   return (
     <AppProvider>
-      <Navigation />
+      <AppNavigation />
       <Toast />
-      <StyledDisconnect />
+      <AppDisconnect />
 
       {Config.MODE !== 'LIVE' && (
         <View style={styles.mode}>

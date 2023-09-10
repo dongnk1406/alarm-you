@@ -1,6 +1,6 @@
 import {ms} from 'react-native-size-matters';
 
-const FontSizes = {
+export const FontSizes = {
   FONT_1: ms(1),
   FONT_2: ms(2),
   FONT_3: ms(3),
@@ -48,5 +48,3 @@ const FontSizes = {
   FONT_63: ms(63),
   FONT_64: ms(64),
 };
-
-export {FontSizes};

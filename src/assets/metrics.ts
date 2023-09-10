@@ -2,7 +2,9 @@ import {Dimensions} from 'react-native';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
 import {s} from 'react-native-size-matters';
 
-const {width, height} = Dimensions.get('window');
+// window: reports width/height without the soft menu bar
+// screen: reports entire screen's width/height
+const {width, height} = Dimensions.get('screen');
 
 const Metrics = {
   screenHeight: width < height ? height : width,
