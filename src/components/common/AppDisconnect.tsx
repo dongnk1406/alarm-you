@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
 import NetInfo from '@react-native-community/netinfo';
 import {t} from 'i18next';
+import {useEffect} from 'react';
 import Toast from 'react-native-toast-message';
+import {GlobalUIService} from 'src/services/globalUI';
 
 const AppDisconnect = () => {
-  const [isConnected, setIsConnected] = useState<boolean | null>(false);
-
   const showDisconnectToast = () => {
+    GlobalUIService.hideLoading();
     return Toast.show({
       type: 'error',
       text1: t('common.disconnect'),
@@ -32,7 +32,7 @@ const AppDisconnect = () => {
     };
   }, []);
 
-  return <></>;
+  return null;
 };
 
 export default AppDisconnect;

@@ -3,11 +3,13 @@ import {Platform, StyleSheet, Text, UIManager, View} from 'react-native';
 import codePush from 'react-native-code-push';
 import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
-import {AppDisconnect} from 'src/components/common';
+import {AppDisconnect, AppLoading} from 'src/components/common';
 import {AppNavigation} from 'src/navigation';
-import AppProvider from 'src/providers';
+import AppProvider from 'src/services/providers';
 import {withCodePushHOC} from 'src/services/codepush';
+import {GlobalUIService} from 'src/services/globalUI';
 import 'src/utils/i18next';
+import {AppTheme} from './theme';
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -22,12 +24,13 @@ function App(): JSX.Element {
   return (
     <AppProvider>
       <AppNavigation />
-      <Toast />
       <AppDisconnect />
+      <AppLoading ref={GlobalUIService.globalLoadingRef} />
+      <Toast />
 
       {Config.MODE !== 'LIVE' && (
         <View style={styles.mode}>
-          <Text style={{color: 'black'}}>{Config.MODE}</Text>
+          <Text style={styles.textMode}>{Config.MODE}</Text>
         </View>
       )}
     </AppProvider>
@@ -39,10 +42,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 36,
     alignSelf: 'center',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: AppTheme.colors.white,
     padding: 8,
     borderRadius: 8,
-    shadowColor: '#FF0000',
+    shadowColor: 'red',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -50,6 +53,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  textMode: {
+    color: 'black',
   },
 });
 

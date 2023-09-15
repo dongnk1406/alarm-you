@@ -6,12 +6,7 @@ interface IProps extends FastImageProps {
   renderSkeletonLoading?: () => React.ReactElement;
 }
 
-const StyledImage = ({
-  renderSkeletonLoading,
-  source,
-  style,
-  ...props
-}: IProps) => {
+const AppImage = ({renderSkeletonLoading, source, style, ...props}: IProps) => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [error, setError] = useState(false);
 
@@ -21,7 +16,7 @@ const StyledImage = ({
         {renderSkeletonLoading ? (
           renderSkeletonLoading()
         ) : (
-          <View style={[{backgroundColor: '#ccc', flex: 1}]} />
+          <View style={[{backgroundColor: '#ccc', flex: 1}, style]} />
         )}
       </View>
     );
@@ -42,4 +37,4 @@ const StyledImage = ({
   );
 };
 
-export default StyledImage;
+export default AppImage;

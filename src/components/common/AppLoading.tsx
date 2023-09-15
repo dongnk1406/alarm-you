@@ -1,55 +1,89 @@
-import React from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
-import {ActivityIndicator, StyleSheet, View, ViewProps} from 'react-native';
-import {LightTheme} from 'src/theme';
-
+import {
+  ActivityIndicator,
+  Keyboard,
+  Modal,
+  StyleSheet,
+  ViewProps,
+} from 'react-native';
+import {AppTheme} from 'src/theme';
+import {StyledView} from '../base';
 export interface ILoading extends ViewProps {
-  isLoading: boolean;
   color?: string;
   mini?: boolean;
-  borderRadius?: number;
 }
 
-export const AppLoading: React.FC<ILoading> = React.memo(props => {
-  let {
-    isLoading,
-    color = LightTheme.colors['primary-1'],
-    mini = false,
-    style,
-  } = props;
-  if (isLoading) {
-    return (
-      <View style={[styles.container, style]}>
-        <View
-          style={[
-            styles.background,
-            mini ? {backgroundColor: 'transparent'} : {},
-          ]}>
-          <ActivityIndicator color={mini ? '#fff' : color} />
-        </View>
-      </View>
-    );
-  } else {
-    return null;
-  }
-});
+const AppLoading = (
+  {color = AppTheme.colors.purpleDark, mini}: ILoading,
+  ref: any,
+) => {
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const countTimerRef = useRef<number>(0);
+  const timerIntervalRef = useRef<NodeJS.Timer>();
+
+  useImperativeHandle(ref, () => ({
+    showLoading: () => {
+      setLoading(true);
+      Keyboard.dismiss();
+    },
+    hideLoading: () => {
+      setLoading(false);
+      countTimerRef.current = 0;
+    },
+  }));
+
+  useEffect(() => {
+    // auto hide loading after > 15s once no response hide loading
+    if (isLoading) {
+      timerIntervalRef.current = setInterval(() => {
+        countTimerRef.current++;
+        if (countTimerRef.current >= 15) {
+          setLoading(false);
+        }
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timerIntervalRef.current);
+      countTimerRef.current = 0;
+    };
+  }, [isLoading]);
+
+  return (
+    <Modal animationType="fade" visible={isLoading} transparent>
+      <StyledView style={styles.container}>
+        <StyledView
+          style={[styles.background]}
+          backgroundColor={mini ? 'transparent' : undefined}>
+          <ActivityIndicator color={mini ? 'transparent' : color} />
+        </StyledView>
+      </StyledView>
+    </Modal>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: LightTheme.blackOpacity(0.5),
-    zIndex: 99,
-    borderRadius: 8,
+    backgroundColor: AppTheme.blackOpacity(0.7),
+    flex: 1,
   },
   background: {
     height: 60,
     width: 60,
     borderRadius: 3,
-    backgroundColor: 'rgba(214, 214, 229, 0.87)',
+    backgroundColor: AppTheme.whiteOpacity(0.8),
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 99,
   },
 });
+
+export default forwardRef(AppLoading);
