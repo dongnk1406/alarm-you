@@ -1,29 +1,21 @@
 import withObservables from '@nozbe/with-observables';
-import {useFocusEffect} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import reactotron from 'reactotron-react-native';
 import {StyledView} from 'src/components/base';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
 import {useAppTheme} from 'src/hooks';
 import {AllStackParamList} from 'src/navigation/config/types';
 
-type Props = NativeStackScreenProps<AllStackParamList, 'MapScreen'> & {
+type Props = NativeStackScreenProps<AllStackParamList, 'SettingScreen'> & {
   skills: SkillsModel[];
 };
-const ChatScreen = ({navigation, skills}: Props) => {
+const SettingScreen = ({navigation, skills}: Props) => {
   const {t} = useTranslation('translation');
   const [text, setText] = useState<string | undefined>('');
   const {colors} = useAppTheme();
-
-  useFocusEffect(
-    useCallback(() => {
-      reactotron.log('colors', colors.mainBackground);
-    }, [colors]),
-  );
 
   const handleSaveSkill = async () => {
     await database.write(async () => {
@@ -36,12 +28,10 @@ const ChatScreen = ({navigation, skills}: Props) => {
     setText('');
   };
 
-  const handleSignOut = () => {};
-
   return (
     <StyledView
       style={{flex: 1}}
-      marginTop={'4xl'}
+      paddingTop={'4xl'}
       backgroundColor={'mainBackground'}>
       <StyledView
         style={{
@@ -103,4 +93,4 @@ const enhance = withObservables(['skills'], () => ({
   skills: database.get<SkillsModel>('skills').query().observe(),
 }));
 
-export default enhance(ChatScreen);
+export default enhance(SettingScreen);

@@ -11,14 +11,13 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import uuid from 'react-native-uuid';
 import Metrics from 'src/assets/metrics';
 import {StyledText, StyledTouchable, StyledView} from 'src/components/base';
+import {AppImage} from 'src/components/common';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
-import {useAppTheme} from 'src/hooks';
+import {getSignOutRequest} from 'src/redux/auth';
 import {useAppDispatch, useAppSelector} from 'src/redux/hooks';
-import {setSignOut, setUserToken} from 'src/redux/slices';
 import {appVersion} from 'src/shared/configs';
 import permission from 'src/utils/permission';
 
@@ -26,15 +25,14 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const {t} = useTranslation('translation');
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const isDarkTheme = useAppSelector(state => state.common.isDarkTheme);
-  const theme = useAppTheme();
+  const dispatch = useAppDispatch();
 
   const [text, setText] = useState<string | undefined>('');
   const [type, setType] = useState<string>('soft');
   const [listSkill, setListSkill] = useState<SkillsModel[]>([]);
   const [currentSkill, setCurrentSkill] = useState<SkillsModel | undefined>();
-
-  const dispatch = useAppDispatch();
+  const listDucks = useAppSelector(state => state.home.listDucks);
+  const userData = useAppSelector(state => state.auth.user);
 
   const handleSaveSkill = async () => {
     if (currentSkill?.id) {
@@ -66,7 +64,7 @@ const HomeScreen = () => {
     fetchData();
   };
 
-  const fetchData = async () => {
+  const fetchSkills = async () => {
     const skillsCollection = database.get<SkillsModel>('skills');
     const response = await skillsCollection
       .query(Q.where('type', type))
@@ -75,16 +73,27 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchSkills();
   }, [type]);
 
-  const onChangeToken = () => {
-    const token = uuid.v4().toString();
-    dispatch(setUserToken(token));
-  };
+  // const getListDucks = () => {
+  //   try {
+  //     const promise = dispatch(getListDucksRequest());
+  //     return promise;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const promise = getListDucks();
+  //   return () => {
+  //     promise?.abort();
+  //   };
+  // }, []);
 
   const handleSignOut = () => {
-    dispatch(setSignOut(null));
+    dispatch(getSignOutRequest(null));
   };
 
   return (
@@ -98,21 +107,17 @@ const HomeScreen = () => {
           <RefreshControl
             refreshing={false}
             onRefresh={() => {
-              fetchData();
+              fetchSkills();
             }}
           />
         }>
         <StyledText style={{color: 'red'}}>{appVersion}</StyledText>
-        <StyledTouchable
-          style={{
-            backgroundColor: 'purple',
-            padding: 8,
-            borderRadius: 4,
-            marginTop: 12,
-          }}
-          onPress={onChangeToken}>
-          <Text>Change token</Text>
-        </StyledTouchable>
+
+        <AppImage
+          source={{uri: userData?.avatar}}
+          style={{width: 100, height: 100, borderRadius: 100}}
+        />
+
         <StyledTouchable
           style={{
             backgroundColor: 'purple',
@@ -162,14 +167,15 @@ const HomeScreen = () => {
 
         <StyledTouchable
           activeOpacity={1}
-          underlayColor={'red'}
+          underlayColor={'#ccc'}
           style={{
             padding: 8,
             borderRadius: 4,
             marginTop: 12,
-            backgroundColor: 'orange',
+            borderWidth: 1,
+            borderColor: 'black',
           }}>
-          <Text>TouchableHighlight</Text>
+          <StyledText color="neutral-black">TouchableHighlight</StyledText>
         </StyledTouchable>
 
         <View
@@ -184,9 +190,11 @@ const HomeScreen = () => {
               borderWidth: 1,
               borderRadius: 8,
               borderColor: 'gray',
-              padding: 8,
+              paddingHorizontal: 8,
+              paddingVertical: 4,
               flex: 1,
               alignSelf: 'flex-start',
+              color: 'black',
             }}
           />
           <StyledTouchable
@@ -267,7 +275,16 @@ const HomeScreen = () => {
             </StyledTouchable>
           ))}
         </View>
+
+        <StyledView>
+          {listDucks?.images?.map(duck => (
+            <StyledText key={duck} color={'neutral-black'}>
+              {duck}
+            </StyledText>
+          ))}
+        </StyledView>
       </ScrollView>
+
       <BottomSheetModal
         ref={bottomSheetModalRef}
         snapPoints={['70%']}

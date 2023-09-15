@@ -1,6 +1,4 @@
-import HomeScreen from './HomeScreen';
-import MapScreen from './MapScreen';
-import ChatScreen from './ChatScreen';
-import SignInScreen from './SignInScreen';
-
-export {HomeScreen, MapScreen, ChatScreen, SignInScreen};
+export * from './auth';
+export * from './home';
+export * from './chat';
+export * from './setting';

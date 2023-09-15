@@ -1,15 +1,50 @@
-import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ChatScreen, HomeScreen} from 'src/containers';
+import React from 'react';
+import {AppImage} from 'src/components/common';
+import {ChatScreen, HomeScreen, SettingScreen} from 'src/containers';
+import {useAppSelector} from 'src/redux/hooks';
 import {BottomTabsParamList} from './config/types';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
 export const AppTab = () => {
+  const userData = useAppSelector(state => state.auth.user);
+
+  const renderAppIcon = () => {
+    return (
+      <AppImage
+        source={{uri: userData?.avatar}}
+        style={{width: 28, height: 28, borderRadius: 28}}
+      />
+    );
+  };
+
   return (
     <Tab.Navigator screenOptions={{headerShown: false}}>
-      <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      <Tab.Screen name="ChatScreen" component={ChatScreen} />
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: renderAppIcon,
+        }}
+      />
+      <Tab.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={{
+          tabBarLabel: 'Chat',
+          tabBarIcon: renderAppIcon,
+        }}
+      />
+      <Tab.Screen
+        name="SettingScreen"
+        component={SettingScreen}
+        options={{
+          tabBarLabel: 'Setting',
+          tabBarIcon: renderAppIcon,
+        }}
+      />
     </Tab.Navigator>
   );
 };

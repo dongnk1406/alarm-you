@@ -6,6 +6,7 @@ import {AppStacks} from './AppStacks';
 import {GuestStacks} from './GuestStacks';
 import {AllStackParamList} from './config/types';
 import {useNotificationBoot} from 'src/services/notification';
+import {AppTheme} from 'src/theme';
 
 export const Stack = createNativeStackNavigator<AllStackParamList>();
 export const navigationRef = createNavigationContainerRef();
@@ -13,17 +14,17 @@ export const navigationRef = createNavigationContainerRef();
 export const AppNavigation = () => {
   useNotificationBoot();
 
-  const token = useAppSelector(state => state.auth.userToken);
+  const userToken = useAppSelector(state => state.auth.userToken);
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',
-        navigationBarHidden: true,
+        navigationBarColor: AppTheme.colors['neutral-white'],
       }}
       initialRouteName="SignInScreen">
-      {token ? AppStacks() : GuestStacks()}
+      {userToken ? AppStacks() : GuestStacks()}
     </Stack.Navigator>
   );
 };
