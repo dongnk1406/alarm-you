@@ -10,6 +10,9 @@ import {
 } from 'redux-persist';
 import Reactotron from '../../ReactotronConfig';
 import rootReducer from './rootReducer';
+import createSagaMiddleware from 'redux-saga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: rootReducer,
@@ -18,10 +21,12 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(),
+    }).concat(sagaMiddleware),
   enhancers: [Reactotron.createEnhancer!()],
   devTools: __DEV__,
 });
+
+// sagaMiddleware()
 
 export const persistor = persistStore(store);
 

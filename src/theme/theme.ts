@@ -1,59 +1,61 @@
 import {createTheme} from '@shopify/restyle';
+import _ from 'lodash';
 import {config} from './config';
 import {palette} from './palette';
 
 export const shadow = {
+  noShadow: {
+    shadowColor: 'transparent',
+  },
   low: {
-    shadowColor: '#000',
+    shadowColor: palette.black,
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowRadius: 2,
+    elevation: 2,
   },
   medium: {
-    shadowColor: '#000',
+    shadowColor: palette.black,
     shadowOffset: {
       width: 0,
-      height: 5,
+      height: 4,
     },
     shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-
-    elevation: 10,
+    shadowRadius: 3,
+    elevation: 4,
   },
   high: {
-    shadowColor: '#000',
+    shadowColor: palette.black,
     shadowOffset: {
       width: 0,
-      height: 7,
+      height: 6,
     },
     shadowOpacity: 0.43,
-    shadowRadius: 9.51,
-    elevation: 15,
+    shadowRadius: 5,
+    elevation: 6,
   },
   extraHigh: {
-    shadowColor: '#000',
+    shadowColor: palette.black,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.51,
+    shadowRadius: 7,
+    elevation: 12,
+  },
+  ultraHigh: {
+    shadowColor: palette.black,
     shadowOffset: {
       width: 0,
       height: 10,
     },
-    shadowOpacity: 0.51,
-    shadowRadius: 13.16,
-    elevation: 20,
-  },
-  ultraHigh: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
     shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-
-    elevation: 24,
+    shadowRadius: 10,
+    elevation: 16,
   },
 };
 
@@ -110,3 +112,5 @@ export const DarkTheme: Theme = {
     primaryCardText: palette.darkGray,
   },
 };
+
+export const AppTheme = _.cloneDeep(LightTheme);

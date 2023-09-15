@@ -1,12 +1,12 @@
 import axios, {AxiosError} from 'axios';
-export const API_DEV_URL = 'https://some-domain.com/api/';
+export const API_DEV_URL = 'https://random-d.uk/api/v2';
 
-const request = axios.create({
+const apiRequest = axios.create({
   baseURL: API_DEV_URL,
 });
 
 // Add a request interceptor
-request.interceptors.request.use(
+apiRequest.interceptors.request.use(
   async config => {
     config.url = config.baseURL! + config.url;
     // const accessToken = store.getState().auth.token;
@@ -28,12 +28,12 @@ request.interceptors.request.use(
 );
 
 // Add a response interceptor
-request.interceptors.response.use(
+apiRequest.interceptors.response.use(
   response => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     try {
-      return response;
+      return response?.data;
     } catch (error) {
       return Promise.reject(error);
     }
@@ -52,4 +52,4 @@ request.interceptors.response.use(
   },
 );
 
-export default request;
+export default apiRequest;
