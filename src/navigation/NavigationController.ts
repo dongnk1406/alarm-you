@@ -58,7 +58,7 @@ export const popToTop = () => {
   }
 };
 
-export const NavigationHelpers = {
+export const NavigationController = {
   navigate,
   setTopLevelNavigator,
   goBack,

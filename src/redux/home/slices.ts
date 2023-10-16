@@ -1,3 +1,5 @@
+// https://redux.js.org/tutorials/essentials/part-5-async-logic#reducers-and-loading-actions
+
 import {createSlice} from '@reduxjs/toolkit';
 import {isFulfilledAction, isPendingAction, isRejectedAction} from '../types';
 import {getListDucksRequest} from './thunks';

@@ -49,7 +49,8 @@ const AppProvider = ({children}: PropsWithChildren) => {
                       }
                       animated
                       showHideTransition="fade"
-                      translucent
+                      backgroundColor={'transparent'}
+                      // translucent
                     />
                     {children}
                   </SafeAreaProvider>

@@ -1,63 +1,6 @@
 import {createTheme} from '@shopify/restyle';
-import _ from 'lodash';
 import {config} from './config';
 import {palette} from './palette';
-
-export const shadow = {
-  noShadow: {
-    shadowColor: 'transparent',
-  },
-  low: {
-    shadowColor: palette.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  medium: {
-    shadowColor: palette.black,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 3,
-    elevation: 4,
-  },
-  high: {
-    shadowColor: palette.black,
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.43,
-    shadowRadius: 5,
-    elevation: 6,
-  },
-  extraHigh: {
-    shadowColor: palette.black,
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.51,
-    shadowRadius: 7,
-    elevation: 12,
-  },
-  ultraHigh: {
-    shadowColor: palette.black,
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 10,
-    elevation: 16,
-  },
-};
 
 export const LightTheme = createTheme({
   breakpoints: {
@@ -82,6 +25,8 @@ export const LightTheme = createTheme({
   fontFamily: config.fonts,
   spacing: config.spacings,
   textVariants: config.textVariants,
+  shadow: config.shadows,
+  extraColors: config.extraColors,
   cardVariants: {
     defaults: {},
     primary: {
@@ -93,10 +38,6 @@ export const LightTheme = createTheme({
       shadowOpacity: 0.1,
     },
   },
-  shadow: shadow,
-  whiteOpacity: (opacity: number) => `rgba(255, 255, 255, ${opacity})`,
-  blackOpacity: (opacity: number) => `rgba(0, 0, 0, ${opacity})`,
-  greenOpacity: (opacity: number) => `rgba(0, 255, 193, ${opacity})`,
 });
 
 export type Theme = typeof LightTheme;
@@ -112,5 +53,3 @@ export const DarkTheme: Theme = {
     primaryCardText: palette.darkGray,
   },
 };
-
-export const AppTheme = _.cloneDeep(LightTheme);

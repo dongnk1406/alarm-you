@@ -1,4 +1,4 @@
-import {s} from 'react-native-size-matters';
+import {palette} from './palette';
 import {FontSizes} from './sizes';
 
 export const config = {
@@ -42,5 +42,66 @@ export const config = {
     'text-3xl': {},
     'text-4xl': {},
     'text-5xl': {},
+  },
+  shadows: {
+    noShadow: {
+      shadowColor: 'transparent',
+    },
+    low: {
+      shadowColor: palette.black,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 2,
+      elevation: 2,
+    },
+    medium: {
+      shadowColor: palette.black,
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.34,
+      shadowRadius: 3,
+      elevation: 4,
+    },
+    high: {
+      shadowColor: palette.black,
+      shadowOffset: {
+        width: 0,
+        height: 6,
+      },
+      shadowOpacity: 0.43,
+      shadowRadius: 5,
+      elevation: 6,
+    },
+    extraHigh: {
+      shadowColor: palette.black,
+      shadowOffset: {
+        width: 0,
+        height: 8,
+      },
+      shadowOpacity: 0.51,
+      shadowRadius: 7,
+      elevation: 12,
+    },
+    ultraHigh: {
+      shadowColor: palette.black,
+      shadowOffset: {
+        width: 0,
+        height: 10,
+      },
+      shadowOpacity: 0.58,
+      shadowRadius: 10,
+      elevation: 16,
+    },
+  },
+  extraColors: {
+    // Color with opacity
+    whiteOpacity: (opacity: number) => `rgba(255, 255, 255, ${opacity})`,
+    blackOpacity: (opacity: number) => `rgba(0, 0, 0, ${opacity})`,
+    greenOpacity: (opacity: number) => `rgba(0, 255, 193, ${opacity})`,
   },
 };

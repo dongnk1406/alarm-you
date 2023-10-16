@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {AppImage} from 'src/components/common';
-import {ChatScreen, HomeScreen, SettingScreen} from 'src/containers';
+import {ChatScreen, HomeScreen, SettingScreen} from 'src/screens';
 import {useAppSelector} from 'src/redux/hooks';
 import {BottomTabsParamList} from './config/types';
 

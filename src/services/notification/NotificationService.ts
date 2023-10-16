@@ -27,6 +27,12 @@ class NotificationHandler {
     });
   }
 
+  async setFCMToken() {
+    const fcmToken = await this.getFCMToken();
+    console.log('[FCMService] FCM Token: ', fcmToken);
+    // store.dispatch(setFCMToken(fcmToken));
+  }
+
   async deleteFCMToken() {
     return await messaging().deleteToken({
       senderId,
@@ -81,6 +87,7 @@ class NotificationHandler {
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
     if (enabled) {
       console.log!('[FCMService] Authorization status:', authStatus);
+      await this.setFCMToken();
     }
   }
 
@@ -88,8 +95,7 @@ class NotificationHandler {
     try {
       const enabled = await messaging().hasPermission();
       if (enabled) {
-        const fcmToken = await this.getFCMToken();
-        console.log('[FCMService] FcmToken', fcmToken);
+        await this.setFCMToken();
       } else {
         this.requestPermission();
       }

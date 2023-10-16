@@ -13,17 +13,14 @@ import {
   StyleSheet,
   ViewProps,
 } from 'react-native';
-import {AppTheme} from 'src/theme';
-import {StyledView} from '../base';
+import {config, palette} from 'src/theme';
+import {StyledText, StyledView} from '../base';
 export interface ILoading extends ViewProps {
   color?: string;
   mini?: boolean;
 }
 
-const AppLoading = (
-  {color = AppTheme.colors.purpleDark, mini}: ILoading,
-  ref: any,
-) => {
+const AppLoading = ({color = palette.purpleDark, mini}: ILoading, ref: any) => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const countTimerRef = useRef<number>(0);
   const timerIntervalRef = useRef<NodeJS.Timer>();
@@ -63,6 +60,7 @@ const AppLoading = (
           style={[styles.background]}
           backgroundColor={mini ? 'transparent' : undefined}>
           <ActivityIndicator color={mini ? 'transparent' : color} />
+          <StyledText>Loading</StyledText>
         </StyledView>
       </StyledView>
     </Modal>
@@ -73,14 +71,14 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: AppTheme.blackOpacity(0.7),
+    backgroundColor: config.extraColors.blackOpacity(0.7),
     flex: 1,
   },
   background: {
     height: 60,
     width: 60,
     borderRadius: 3,
-    backgroundColor: AppTheme.whiteOpacity(0.8),
+    backgroundColor: config.extraColors.whiteOpacity(0.8),
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -11,11 +11,13 @@
 
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
-export type AllStackParamList = BottomTabsParamList &
-  GuestStacks &
-  GeneralParamList;
+export type AllStackParamList = {
+  AppTab: undefined;
+} & BottomTabsParamList &
+  GuestStacksParamList &
+  AppStacksParamList;
 
-export type GuestStacks = {
+export type GuestStacksParamList = {
   SignInScreen: undefined;
   SignUpScreen: undefined;
 };
@@ -28,6 +30,8 @@ export type BottomTabsParamList = {
 };
 
 /** Screens that don't have bottom tabs or not inside bottom tab */
-export type GeneralParamList = {
+export type AppStacksParamList = {
   MapScreen: undefined;
+  SingleChatScreen: undefined;
+  SearchChatUserScreen: undefined;
 };

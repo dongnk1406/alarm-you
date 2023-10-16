@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import uuid from 'react-native-uuid';
-import {StyledText} from 'src/components/base';
-import {NavigationHelpers} from 'src/navigation';
+import {StyledText, StyledTouchable} from 'src/components/base';
+import {NavigationController} from 'src/navigation';
+import {getSignInRequest} from 'src/redux/auth';
 import {useAppDispatch} from 'src/redux/hooks';
 import {GlobalUIService} from 'src/services/globalUI';
 import * as yup from 'yup';
@@ -19,34 +19,21 @@ import * as yup from 'yup';
 type IFormData = {
   email: string;
   password: string;
-  confirmPassword: string;
-  avatar: string;
 };
-const SignUpScreen = () => {
+const SignInScreen = () => {
   const dispatch = useAppDispatch();
 
   const signInSchema = yup
     .object({
       email: yup.string().required().email('can email'),
       password: yup.string().required().max(10),
-      confirmPassword: yup
-        .string()
-        .required()
-        .oneOf([yup.ref('password'), ''], 'Need to match'),
-      avatar: yup.string().required(),
     })
     .required();
 
   const {
     control,
     handleSubmit,
-    formState: {errors, isValid},
-    watch,
-    reset,
-    resetField,
-    setValue,
-    getValues,
-    clearErrors,
+    formState: {errors},
   } = useForm<IFormData>({
     defaultValues: {
       email: '',
@@ -57,16 +44,18 @@ const SignUpScreen = () => {
   });
 
   const onSubmit = async (form: IFormData) => {
-    const payload = {
-      ...form,
-      id: uuid.v4().toString(),
-    };
-
     try {
       GlobalUIService.showLoading();
-      await database().ref(`/users/${payload.id}`).set(payload);
-      GlobalUIService.hideLoading();
-      NavigationHelpers.navigate('SignInScreen');
+      const response = await database()
+        .ref('/users/')
+        .orderByChild('email')
+        .equalTo(form.email)
+        .once('value');
+
+      if (response) {
+        const userData = Object.values(response.val())[0];
+        dispatch(getSignInRequest(userData));
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,7 +69,7 @@ const SignUpScreen = () => {
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, paddingHorizontal: 16}}>
         <StyledText color={'neutral-black'} textAlign="center" variant={'body'}>
-          Register screen
+          Sign In screen
         </StyledText>
         <Text style={{color: 'black'}}>Email</Text>
         <Controller
@@ -135,60 +124,6 @@ const SignUpScreen = () => {
           <Text style={{color: 'red'}}>{errors.password.message}</Text>
         )}
 
-        <Text style={{color: 'black'}}>Confirm Password</Text>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          name="confirmPassword"
-          render={({field: {value, onChange, onBlur}}) => (
-            <TextInput
-              value={value}
-              onChangeText={onChange}
-              autoCapitalize="none"
-              style={{
-                borderWidth: 1,
-                borderRadius: 8,
-                borderColor: 'gray',
-                padding: 8,
-                color: 'black',
-              }}
-              placeholderTextColor={'grey'}
-            />
-          )}
-        />
-        {errors.confirmPassword && (
-          <Text style={{color: 'red'}}>{errors.confirmPassword.message}</Text>
-        )}
-
-        <Text style={{color: 'black'}}>Avatar</Text>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          name="avatar"
-          render={({field: {value, onChange, onBlur}}) => (
-            <TextInput
-              value={value}
-              onChangeText={onChange}
-              autoCapitalize="none"
-              style={{
-                borderWidth: 1,
-                borderRadius: 8,
-                borderColor: 'gray',
-                padding: 8,
-                color: 'black',
-              }}
-              placeholderTextColor={'grey'}
-            />
-          )}
-        />
-        {errors.avatar && (
-          <Text style={{color: 'red'}}>{errors.avatar.message}</Text>
-        )}
-
         <TouchableOpacity
           style={{
             backgroundColor: 'orange',
@@ -199,11 +134,26 @@ const SignUpScreen = () => {
             alignItems: 'center',
           }}
           onPress={handleSubmit(onSubmit)}>
-          <Text>Register</Text>
+          <StyledText color={'black'}>Sign In</StyledText>
         </TouchableOpacity>
+
+        <StyledTouchable
+          onPress={() => {
+            NavigationController.navigate('SignUpScreen');
+          }}
+          style={{
+            backgroundColor: 'orange',
+            padding: 8,
+            borderRadius: 4,
+            marginTop: 12,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <StyledText color={'neutral-black'}>Register</StyledText>
+        </StyledTouchable>
       </View>
     </SafeAreaView>
   );
 };
 
-export default SignUpScreen;
+export default SignInScreen;

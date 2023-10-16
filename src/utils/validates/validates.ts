@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 import * as yup from 'yup';
-import {requireField} from './format';
+import {requireField} from '../formats';
 
 export const REGEX_EMAIL =
   /^(([^<>()[\]\\x.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

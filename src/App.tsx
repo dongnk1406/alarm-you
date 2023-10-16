@@ -5,11 +5,11 @@ import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
 import {AppDisconnect, AppLoading} from 'src/components/common';
 import {AppNavigation} from 'src/navigation';
-import AppProvider from 'src/services/providers';
 import {withCodePushHOC} from 'src/services/codepush';
 import {GlobalUIService} from 'src/services/globalUI';
+import AppProvider from 'src/services/providers';
 import 'src/utils/i18next';
-import {AppTheme} from './theme';
+import {palette} from './theme';
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 36,
     alignSelf: 'center',
-    backgroundColor: AppTheme.colors.white,
+    backgroundColor: palette.white,
     padding: 8,
     borderRadius: 8,
     shadowColor: 'red',

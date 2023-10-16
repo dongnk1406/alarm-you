@@ -2,6 +2,11 @@ import Config from 'react-native-config';
 
 const APP_NAME = Config.APP_NAME || 'My Alarm';
 
+interface Resource<T, K> {
+  type: T;
+  value: K;
+}
+
 const en = {
   common: {
     defaultLanguage: 'English',
@@ -15,6 +20,7 @@ const en = {
     disconnect: 'Disconnect',
     disconnectDescription: 'You lót the internet connection',
     goToSetting: 'Go to Setting',
+    passParam: 'You can pass param using {{variable}}',
   },
   permission: {
     requestPhotoLibraryTitle:
