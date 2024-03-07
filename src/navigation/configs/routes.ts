@@ -1,0 +1,3 @@
+const APP_ROUTES = {
+  HOME_SCREEN: 'HOME_SCREEN',
+};

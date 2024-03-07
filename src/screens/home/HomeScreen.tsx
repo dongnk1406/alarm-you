@@ -11,7 +11,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import Metrics from 'src/assets/metrics';
 import {StyledText, StyledTouchable, StyledView} from 'src/components/base';
 import {AppImage} from 'src/components/common';
 import database from 'src/database/database';
@@ -19,6 +18,7 @@ import {SkillsModel} from 'src/database/models';
 import {getSignOutRequest} from 'src/redux/auth';
 import {useAppDispatch, useAppSelector} from 'src/redux/hooks';
 import {appVersion} from 'src/shared/configs';
+import Metrics from 'src/theme/metrics';
 import permission from 'src/utils/permission';
 
 const HomeScreen = () => {

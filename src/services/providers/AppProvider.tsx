@@ -16,7 +16,7 @@ import {navigationRef} from 'src/navigation';
 import mmkvStorage from 'src/redux/mmkvStorage';
 import {setDarkTheme} from 'src/redux/slices';
 import store, {persistor} from 'src/redux/store';
-import {StorageConstant} from 'src/shared/constants';
+import {LocalStorageConstant} from 'src/shared/constants';
 import {DarkTheme, LightTheme} from 'src/theme';
 
 const AppProvider = ({children}: PropsWithChildren) => {
@@ -36,7 +36,7 @@ const AppProvider = ({children}: PropsWithChildren) => {
               ref={navigationRef}
               onStateChange={state =>
                 mmkvStorage.setItem(
-                  StorageConstant.NAVIGATION_STATE,
+                  LocalStorageConstant.NAVIGATION_STATE,
                   JSON.stringify(state),
                 )
               }>

@@ -5,7 +5,7 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import Metrics from 'src/assets/metrics';
+import Metrics from 'src/theme/metrics';
 
 const useSlideAnimation = () => {
   const transXRight = useSharedValue(0);
