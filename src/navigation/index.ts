@@ -1,2 +1,2 @@
-export * from './AppNavigation';
+export * from './AppNavigator';
 export * from './NavigationController';

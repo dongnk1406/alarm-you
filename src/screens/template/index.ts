@@ -1,1 +1,1 @@
-export {Temp} from './Temp.view';
+export {Template} from './Template.view';

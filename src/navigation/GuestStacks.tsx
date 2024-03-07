@@ -1,5 +1,5 @@
 import React from 'react';
-import {Stack} from './AppNavigation';
+import {Stack} from './AppNavigator';
 import {SignInScreen, SignUpScreen} from 'src/screens';
 
 export const GuestStacks = () => {

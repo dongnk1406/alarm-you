@@ -2,13 +2,13 @@
 
 import React from 'react';
 import {MapScreen, SearchChatUserScreen, SingleChatScreen} from 'src/screens';
-import {Stack} from './AppNavigation';
-import {AppTab} from './AppTab';
+import {Stack} from './AppNavigator';
+import {AppBottomTab} from './AppBottomTab';
 
 export const AppStacks = () => {
   return (
     <Stack.Group>
-      <Stack.Screen name="AppTab" component={AppTab} />
+      <Stack.Screen name="AppBottomTab" component={AppBottomTab} />
       <Stack.Screen name="MapScreen" component={MapScreen} />
       <Stack.Screen name="SingleChatScreen" component={SingleChatScreen} />
       <Stack.Screen

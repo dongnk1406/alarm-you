@@ -1,7 +1,5 @@
 import {CommonActions, StackActions} from '@react-navigation/native';
-import {navigationRef} from './AppNavigation';
-
-export function setTopLevelNavigator(navigatorRef: any) {}
+import {navigationRef} from './AppNavigator';
 
 export function navigate(name: any, params?: any) {
   navigationRef.dispatch(
@@ -30,7 +28,7 @@ export function goBack() {
   }
 }
 
-export function pop(value: any) {
+export function pop(value?: number) {
   navigationRef.dispatch(StackActions.pop(value));
 }
 
@@ -60,7 +58,9 @@ export const popToTop = () => {
 
 export const NavigationController = {
   navigate,
-  setTopLevelNavigator,
   goBack,
   pop,
+  replace,
+  push,
+  popToTop,
 };
