@@ -53,7 +53,7 @@ const HomeScreen = () => {
     }
 
     setText('');
-    fetchData();
+    fetchSkills();
   };
 
   const handleRemoveSkill = async (skill: SkillsModel) => {
@@ -61,7 +61,7 @@ const HomeScreen = () => {
       await skill.markAsDeleted();
     });
 
-    fetchData();
+    fetchSkills();
   };
 
   const fetchSkills = async () => {
@@ -214,7 +214,7 @@ const HomeScreen = () => {
 
         <StyledView flexDirection={'row'} marginTop={'m'}>
           <StyledTouchable
-            activeScale={0.8}
+            activeScale={0.9}
             style={{
               backgroundColor: type === 'soft' ? 'orange' : 'pink',
               padding: 8,
@@ -300,7 +300,7 @@ const HomeScreen = () => {
             {...props}
             disappearsOnIndex={-1}
             appearsOnIndex={0}
-            opacity={0.8}
+            opacity={0.6}
           />
         )}>
         <View

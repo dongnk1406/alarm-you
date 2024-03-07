@@ -53,8 +53,8 @@ const AppLoading = ({}, ref: any) => {
   return (
     <StyledView style={styles.container}>
       <StyledView style={[styles.background]}>
-        <AppActivityIndicator color={palette.white} size={'large'} />
-        <StyledText color={'white'} marginTop={'s'}>
+        <AppActivityIndicator color={palette.black} size={'small'} />
+        <StyledText color={'black'} marginTop={'s'}>
           Loading...
         </StyledText>
       </StyledView>
@@ -64,15 +64,16 @@ const AppLoading = ({}, ref: any) => {
 
 const styles = StyleSheet.create({
   container: {
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    zIndex: 1,
   },
   background: {
-    height: s(80),
-    width: s(80),
+    height: s(70),
+    width: s(70),
     borderRadius: s(4),
-    backgroundColor: config.extraColors.blackOpacity(0.7),
+    backgroundColor: config.extraColors.whiteOpacity(0.5),
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -22,7 +22,8 @@ export const AppNavigator = () => {
         animation: 'slide_from_right',
       }}
       initialRouteName="SignInScreen">
-      {userToken ? AppStacks() : GuestStacks()}
+      {/* {userToken ? AppStacks() : GuestStacks()} */}
+      {AppStacks()}
     </Stack.Navigator>
   );
 };

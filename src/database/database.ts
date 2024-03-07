@@ -2,11 +2,12 @@ import {Database} from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 
 import migrations from './migrations';
-import {SkillsModel, UsersModel} from './models';
+import {SkillsModel, UsersModel, CommentsModel, PostsModel} from './models';
 import {schema} from './schemas';
+import {LOCAL_DATABASE_NAME} from './configs/keys';
 
 const adapter = new SQLiteAdapter({
-  dbName: 'WatermelonDB_3',
+  dbName: LOCAL_DATABASE_NAME,
   schema: schema,
   // (You might want to comment it out for development purposes -- see Migrations documentation)
   migrations: migrations,
@@ -24,7 +25,7 @@ const adapter = new SQLiteAdapter({
 // Then, make a Watermelon database from it!
 const database = new Database({
   adapter,
-  modelClasses: [SkillsModel, UsersModel],
+  modelClasses: [SkillsModel, UsersModel, CommentsModel, PostsModel],
 });
 
 export default database;
