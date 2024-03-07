@@ -4,12 +4,12 @@ import codePush from 'react-native-code-push';
 import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
 import {AppDisconnect, AppLoading} from 'src/components/common';
-import {AppNavigation} from 'src/navigation';
 import {withCodePushHOC} from 'src/services/codepush';
 import {GlobalUIService} from 'src/services/globalUI';
 import AppProvider from 'src/services/providers';
-import 'src/utils/i18next';
+import 'src/services/i18next';
 import {palette} from './theme';
+import {AppNavigator} from './navigation/AppNavigator';
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -23,7 +23,7 @@ function App(): JSX.Element {
 
   return (
     <AppProvider>
-      <AppNavigation />
+      <AppNavigator />
       <AppDisconnect />
       <AppLoading ref={GlobalUIService.globalLoadingRef} />
       <Toast />

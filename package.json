@@ -25,9 +25,11 @@
     "cp-ios": "appcenter codepush release-react -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-ios --description $changelog -d Production --plist-file 'ios/Trevo/Info.plist'",
     "cp-ios:staging": "appcenter codepush release-react -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-ios  --description $changelog -d Staging --plist-file 'ios/Trevo/Info.plist'",
     "cp-ios:rb": "appcenter codepush rollback -a Socar-Mobility-Malaysia-Sdn.-Bhd./trevo-ios Production",
-    "cp-ios:rb-staging": "appcenter codepush rollback -a dong.nguyen-adamo.software/alram-you Staging"
+    "cp-ios:rb-staging": "appcenter codepush rollback -a dong.nguyen-adamo.software/alram-you Staging",
+    "android:bundle": "yarn android-clean && cd android && ./gradlew bundleRelease && cd .."
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^4.0.1",
     "@gorhom/bottom-sheet": "^4.4.7",
     "@hookform/resolvers": "^3.1.1",
     "@notifee/react-native": "^7.7.1",
@@ -41,6 +43,7 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@reduxjs/toolkit": "^1.9.5",
+    "@shopify/flash-list": "^1.6.3",
     "@shopify/restyle": "^2.4.2",
     "axios": "^1.4.0",
     "i18next": "^23.1.0",
@@ -56,6 +59,7 @@
     "react-native-gesture-handler": "^2.12.0",
     "react-native-gifted-chat": "^2.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-keychain": "^8.1.2",
     "react-native-maps": "^1.7.1",
     "react-native-mmkv": "^2.10.0",
     "react-native-permissions": "^3.8.0",

@@ -7,7 +7,7 @@ import {
   openSettings,
   request,
 } from 'react-native-permissions';
-import i18next from 'src/utils/i18next';
+import i18next from 'src/services/i18next';
 
 enum EPermission {
   PHOTO = 'photo',
@@ -18,7 +18,40 @@ enum EPermission {
 
 const isIOS = Platform.OS === 'ios';
 
-const requestCamera = async () => {
+const showPermissionGrantMessage = (type: EPermission) => {
+  const title = {
+    [EPermission.CAMERA]: i18next.t('permission.requestPhotoLibraryTitle', {
+      permissionType: type,
+    }),
+    [EPermission.PHOTO]: i18next.t('permission.requestPhotoLibraryTitle'),
+    [EPermission.AUDIO]: i18next.t('permission.requestPhotoLibraryTitle'),
+    [EPermission.LOCATION]: i18next.t('permission.requestLocationTitle'),
+  };
+
+  const message = {
+    [EPermission.CAMERA]: i18next.t('permission.requestPhotoLibraryMessage'),
+    [EPermission.PHOTO]: i18next.t('permission.requestPhotoLibraryMessage'),
+    [EPermission.AUDIO]: i18next.t('permission.requestPhotoLibraryMessage'),
+    [EPermission.LOCATION]: i18next.t('permission.requestLocationMessage'),
+  };
+
+  Alert.alert(title[type], message[type], [
+    {
+      text: i18next.t('common.goToSetting'),
+      onPress: () =>
+        openSettings().catch(() => console.log('cannot open settings')),
+    },
+    {
+      text: i18next.t('common.cancel'),
+    },
+  ]);
+};
+
+const showPermissionUnavailable = (type: EPermission) => {
+  Alert.alert(i18next.t('permission.unavailable'));
+};
+
+const requestCameraPermission = async (withMsgDenied: boolean = true) => {
   const requestPermission = isIOS
     ? PERMISSIONS.IOS.CAMERA
     : PERMISSIONS.ANDROID.CAMERA;
@@ -26,12 +59,12 @@ const requestCamera = async () => {
     const checkPermission = await check(requestPermission);
     switch (checkPermission) {
       case RESULTS.BLOCKED:
-        showPermissionMessage(EPermission.CAMERA);
+        showPermissionGrantMessage(EPermission.CAMERA);
         return false;
       case RESULTS.DENIED:
         const result = await request(requestPermission);
         if (result === RESULTS.BLOCKED) {
-          showPermissionMessage(EPermission.CAMERA);
+          showPermissionGrantMessage(EPermission.CAMERA);
         }
         return result === RESULTS.GRANTED;
       case RESULTS.UNAVAILABLE:
@@ -46,7 +79,7 @@ const requestCamera = async () => {
   }
 };
 
-const requestPhotoLibrary = async () => {
+const requestPhotoLibraryPermission = async (withMsgDenied: boolean = true) => {
   const requestPermission = isIOS
     ? PERMISSIONS.IOS.PHOTO_LIBRARY
     : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE;
@@ -55,12 +88,12 @@ const requestPhotoLibrary = async () => {
     const checkPermission = await check(requestPermission);
     switch (checkPermission) {
       case RESULTS.BLOCKED:
-        showPermissionMessage(EPermission.PHOTO);
+        showPermissionGrantMessage(EPermission.PHOTO);
         return false;
       case RESULTS.DENIED:
         const result = await request(requestPermission);
         if (result === RESULTS.BLOCKED) {
-          showPermissionMessage(EPermission.PHOTO);
+          showPermissionGrantMessage(EPermission.PHOTO);
         }
         return result === RESULTS.GRANTED;
       case RESULTS.UNAVAILABLE:
@@ -75,13 +108,13 @@ const requestPhotoLibrary = async () => {
   }
 };
 
-const requestAudio = async () => {
+const requestAudioPermission = async (withMsgDenied: boolean = true) => {
   try {
     const checkPermission = await check(
       isIOS ? PERMISSIONS.IOS.MICROPHONE : PERMISSIONS.ANDROID.RECORD_AUDIO,
     );
     if (checkPermission === RESULTS.BLOCKED) {
-      showPermissionMessage(EPermission.AUDIO);
+      showPermissionGrantMessage(EPermission.AUDIO);
       return false;
     }
     if (checkPermission === RESULTS.DENIED) {
@@ -101,7 +134,7 @@ const requestAudio = async () => {
   }
 };
 
-const requestLocation = async () => {
+const requestLocationPermission = async (withMsgDenied: boolean = true) => {
   try {
     const checkPermission = await check(
       isIOS
@@ -109,7 +142,7 @@ const requestLocation = async () => {
         : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
     );
     if (checkPermission === RESULTS.BLOCKED) {
-      showPermissionMessage(EPermission.LOCATION);
+      showPermissionGrantMessage(EPermission.LOCATION);
       return false;
     }
     if (checkPermission === RESULTS.DENIED) {
@@ -119,7 +152,7 @@ const requestLocation = async () => {
           : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
       );
       if (result === RESULTS.BLOCKED) {
-        showPermissionMessage(EPermission.LOCATION);
+        showPermissionGrantMessage(EPermission.LOCATION);
       }
       return result === RESULTS.GRANTED;
     }
@@ -133,42 +166,9 @@ const requestLocation = async () => {
   }
 };
 
-const showPermissionMessage = (type: EPermission) => {
-  const title = {
-    camera: i18next.t('permission.requestPhotoLibraryTitle', {
-      permissionType: type,
-    }),
-    photo: i18next.t('permission.requestPhotoLibraryTitle'),
-    audio: i18next.t('permission.requestPhotoLibraryTitle'),
-    location: i18next.t('permission.requestLocationTitle'),
-  };
-
-  const message = {
-    camera: i18next.t('permission.requestPhotoLibraryMessage'),
-    photo: i18next.t('permission.requestPhotoLibraryMessage'),
-    audio: i18next.t('permission.requestPhotoLibraryMessage'),
-    location: i18next.t('permission.requestLocationMessage'),
-  };
-
-  Alert.alert(title[type], message[type], [
-    {
-      text: i18next.t('common.goToSetting'),
-      onPress: () =>
-        openSettings().catch(() => console.log('cannot open settings')),
-    },
-    {
-      text: i18next.t('common.cancel'),
-    },
-  ]);
-};
-
-const showPermissionUnavailable = (type: EPermission) => {
-  Alert.alert(i18next.t('permission.unavailable'));
-};
-
 export default {
-  requestPhotoLibrary,
-  requestCamera,
-  requestAudio,
-  requestLocation,
+  requestPhotoLibraryPermission,
+  requestCameraPermission,
+  requestAudioPermission,
+  requestLocationPermission,
 };
