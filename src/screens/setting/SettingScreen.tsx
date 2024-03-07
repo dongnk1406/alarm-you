@@ -7,7 +7,7 @@ import {StyledView} from 'src/components/base';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
 import {useAppTheme} from 'src/hooks';
-import {AllStackParamList} from 'src/navigation/config/types';
+import {AllStackParamList} from 'src/navigation/configs/types';
 
 type Props = NativeStackScreenProps<AllStackParamList, 'SettingScreen'> & {
   skills: SkillsModel[];
@@ -89,6 +89,7 @@ const SettingScreen = ({navigation, skills}: Props) => {
   );
 };
 
+// This is how you make your app reactive! ✨
 const enhance = withObservables(['skills'], () => ({
   skills: database.get<SkillsModel>('skills').query().observe(),
 }));

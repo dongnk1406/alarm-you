@@ -1,3 +1,4 @@
+// https://stackoverflow.com/questions/63861907/react-native-add-fade-in-animation
 import React, {
   forwardRef,
   useEffect,
@@ -5,22 +6,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
-
-import {
-  ActivityIndicator,
-  Keyboard,
-  Modal,
-  StyleSheet,
-  ViewProps,
-} from 'react-native';
+import {Keyboard, Modal, StyleSheet} from 'react-native';
+import {s} from 'react-native-size-matters';
 import {config, palette} from 'src/theme';
 import {StyledText, StyledView} from '../base';
-export interface ILoading extends ViewProps {
-  color?: string;
-  mini?: boolean;
-}
+import AppActivityIndicator from './AppActivityIndicator';
 
-const AppLoading = ({color = palette.purpleDark, mini}: ILoading, ref: any) => {
+const AppLoading = ({}, ref: any) => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const countTimerRef = useRef<number>(0);
   const timerIntervalRef = useRef<NodeJS.Timer>();
@@ -43,6 +35,7 @@ const AppLoading = ({color = palette.purpleDark, mini}: ILoading, ref: any) => {
         countTimerRef.current++;
         if (countTimerRef.current >= 15) {
           setLoading(false);
+          // You can show toast for error message
         }
       }, 1000);
     }
@@ -53,17 +46,19 @@ const AppLoading = ({color = palette.purpleDark, mini}: ILoading, ref: any) => {
     };
   }, [isLoading]);
 
+  if (!isLoading) {
+    return null;
+  }
+
   return (
-    <Modal animationType="fade" visible={isLoading} transparent>
-      <StyledView style={styles.container}>
-        <StyledView
-          style={[styles.background]}
-          backgroundColor={mini ? 'transparent' : undefined}>
-          <ActivityIndicator color={mini ? 'transparent' : color} />
-          <StyledText>Loading</StyledText>
-        </StyledView>
+    <StyledView style={styles.container}>
+      <StyledView style={[styles.background]}>
+        <AppActivityIndicator color={palette.white} size={'large'} />
+        <StyledText color={'white'} marginTop={'s'}>
+          Loading...
+        </StyledText>
       </StyledView>
-    </Modal>
+    </StyledView>
   );
 };
 
@@ -71,17 +66,17 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: config.extraColors.blackOpacity(0.7),
     flex: 1,
   },
   background: {
-    height: 60,
-    width: 60,
-    borderRadius: 3,
-    backgroundColor: config.extraColors.whiteOpacity(0.8),
+    height: s(80),
+    width: s(80),
+    borderRadius: s(4),
+    backgroundColor: config.extraColors.blackOpacity(0.7),
     justifyContent: 'center',
     alignItems: 'center',
   },
 });
 
+// Consider using global UI, it can block the main thread => crash the app
 export default forwardRef(AppLoading);

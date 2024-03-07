@@ -37,7 +37,7 @@ export const useNotificationBoot = () => {
 
     messaging().setBackgroundMessageHandler(async remoteMessage => {
       console.log(
-        '[FCMService] Message handled in the background!',
+        '[FCMService] Handles FCM messages when the app is in a killed state.',
         remoteMessage,
       );
     });

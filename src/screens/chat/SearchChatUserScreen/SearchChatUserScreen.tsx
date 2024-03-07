@@ -7,7 +7,7 @@ import uuid from 'react-native-uuid';
 import {StyledText, StyledTouchable} from 'src/components/base';
 import {AppImage, AppRefreshControl} from 'src/components/common';
 import {NavigationController} from 'src/navigation';
-import {AllStackParamList} from 'src/navigation/config/types';
+import {AllStackParamList} from 'src/navigation/configs/types';
 import {useAppSelector} from 'src/redux/hooks';
 import {GlobalUIService} from 'src/services/globalUI';
 

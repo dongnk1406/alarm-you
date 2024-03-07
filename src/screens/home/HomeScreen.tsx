@@ -128,7 +128,8 @@ const HomeScreen = () => {
             marginTop: 12,
           }}
           onPress={async () => {
-            const hasPermission = await permission.requestPhotoLibrary();
+            const hasPermission =
+              await permission.requestPhotoLibraryPermission();
           }}>
           <Text>Open gallery</Text>
         </StyledTouchable>

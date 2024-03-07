@@ -18,7 +18,7 @@ function MapScreen(): JSX.Element {
   });
 
   const getCurrentRegion = async () => {
-    const hasPermission = await permission.requestLocation();
+    const hasPermission = await permission.requestLocationPermission();
     if (hasPermission) {
       Geolocation.getCurrentPosition(
         position => {
