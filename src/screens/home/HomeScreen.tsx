@@ -292,9 +292,6 @@ const HomeScreen = () => {
         ref={bottomSheetModalRef}
         snapPoints={['70%']}
         onChange={() => {}}
-        detached
-        bottomInset={(Metrics.screenHeight * 0.3) / 2 + Metrics.topInset}
-        style={{marginHorizontal: 20}}
         backdropComponent={props => (
           <BottomSheetBackdrop
             {...props}

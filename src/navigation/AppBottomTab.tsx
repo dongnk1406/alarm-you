@@ -1,8 +1,9 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
+import {Images} from 'src/assets/images';
 import {AppImage} from 'src/components/common';
-import {ChatScreen, HomeScreen, SettingScreen} from 'src/screens';
 import {useAppSelector} from 'src/redux/hooks';
+import {HomeScreen, SettingScreen} from 'src/screens';
 import {BottomTabsParamList} from './configs/types';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
@@ -13,8 +14,9 @@ export const AppBottomTab = () => {
   const renderAppIcon = () => {
     return (
       <AppImage
-        source={{uri: userData?.avatar}}
-        style={{width: 28, height: 28, borderRadius: 28}}
+        source={Images.houseGuestHost}
+        style={{width: 36, height: 36, borderRadius: 18}}
+        resizeMode="contain"
       />
     );
   };
@@ -26,14 +28,6 @@ export const AppBottomTab = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: renderAppIcon,
-        }}
-      />
-      <Tab.Screen
-        name="ChatScreen"
-        component={ChatScreen}
-        options={{
-          tabBarLabel: 'Chat',
           tabBarIcon: renderAppIcon,
         }}
       />

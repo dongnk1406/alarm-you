@@ -17,7 +17,7 @@ import mmkvStorage from 'src/redux/mmkvStorage';
 import {setDarkTheme} from 'src/redux/slices';
 import store, {persistor} from 'src/redux/store';
 import {LocalStorageConstant} from 'src/shared/constants';
-import {DarkTheme, LightTheme} from 'src/theme';
+import {DarkTheme, LightTheme, palette} from 'src/theme';
 
 const AppProvider = ({children}: PropsWithChildren) => {
   const scheme = useColorScheme();
@@ -49,8 +49,7 @@ const AppProvider = ({children}: PropsWithChildren) => {
                       }
                       animated
                       showHideTransition="fade"
-                      backgroundColor={'transparent'}
-                      translucent
+                      backgroundColor={palette['primary-1']}
                     />
                     {children}
                   </SafeAreaProvider>

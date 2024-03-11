@@ -4,7 +4,7 @@ import {field, text, date} from '@nozbe/watermelondb/decorators';
 export class PostsModel extends Model {
   static table = 'posts';
   static associations = {
-    comments: {type: 'has_many', foreignKey: 'post_id'},
+    comments: {type: 'has_many' as const, foreignKey: 'post_id'},
   };
   @text('title') title?: string;
   @text('body') body?: any;

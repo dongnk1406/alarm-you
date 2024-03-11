@@ -21,7 +21,7 @@ export const AppNavigator = () => {
         headerShown: false,
         animation: 'slide_from_right',
       }}
-      initialRouteName="SignInScreen">
+      initialRouteName="AppBottomTab">
       {/* {userToken ? AppStacks() : GuestStacks()} */}
       {AppStacks()}
     </Stack.Navigator>
