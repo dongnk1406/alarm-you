@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Image} from 'react-native';
+import {View} from 'react-native';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
 
 interface IProps extends FastImageProps {
@@ -7,7 +7,7 @@ interface IProps extends FastImageProps {
   zoomable?: boolean;
 }
 
-// use fast image for remote image
+// use AppFastImage for local image
 const AppFastImage = ({
   renderSkeletonLoading,
   source,

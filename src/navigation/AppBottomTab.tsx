@@ -3,7 +3,7 @@ import React from 'react';
 import {Images} from 'src/assets/images';
 import {AppImage} from 'src/components/common';
 import {useAppSelector} from 'src/redux/hooks';
-import {HomeScreen, SettingScreen} from 'src/screens';
+import {ChartScreen, HomeScreen, SettingScreen} from 'src/screens';
 import {BottomTabsParamList} from './configs/types';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
@@ -17,6 +17,7 @@ export const AppBottomTab = () => {
         source={Images.houseGuestHost}
         style={{width: 36, height: 36, borderRadius: 18}}
         resizeMode="contain"
+        withSkeletonLoading={false}
       />
     );
   };
@@ -28,6 +29,14 @@ export const AppBottomTab = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
+          tabBarIcon: renderAppIcon,
+        }}
+      />
+      <Tab.Screen
+        name="ChartScreen"
+        component={ChartScreen}
+        options={{
+          tabBarLabel: 'Chart',
           tabBarIcon: renderAppIcon,
         }}
       />

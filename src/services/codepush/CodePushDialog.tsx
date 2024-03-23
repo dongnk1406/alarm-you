@@ -33,7 +33,11 @@ const CodePushDialog = ({
           }}>
           <Text style={{color: 'black'}}>Codepush Update</Text>
           {messages &&
-            messages.map(mes => <Text style={{color: 'black'}}>{mes}</Text>)}
+            messages.map((mes, index) => (
+              <Text style={{color: 'black'}} key={`${mes}-${index}`}>
+                {mes}
+              </Text>
+            ))}
           <StyledView flexDirection={'row'} justifyContent={'flex-end'}>
             <StyledTouchable activeOpacity={0.5} onPress={onHideModal}>
               <Text style={{color: 'black'}}>Later</Text>

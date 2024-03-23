@@ -32,13 +32,15 @@ const SettingScreen = ({navigation, skills}: Props) => {
     <StyledView
       style={{flex: 1}}
       paddingTop={'4xl'}
-      backgroundColor={'mainBackground'}>
+      backgroundColor={'mainBackground'}
+    >
       <StyledView
         style={{
           flexDirection: 'row',
           marginTop: 12,
           paddingHorizontal: 16,
-        }}>
+        }}
+      >
         <TextInput
           value={text}
           onChangeText={setText}
@@ -57,7 +59,8 @@ const SettingScreen = ({navigation, skills}: Props) => {
             borderRadius: 4,
             marginLeft: 8,
           }}
-          onPress={handleSaveSkill}>
+          onPress={handleSaveSkill}
+        >
           <Text>Create</Text>
         </TouchableOpacity>
       </StyledView>
@@ -79,7 +82,8 @@ const SettingScreen = ({navigation, skills}: Props) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-              }}>
+              }}
+            >
               <Text>{item.name}</Text>
             </View>
           );

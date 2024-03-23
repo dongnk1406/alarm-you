@@ -105,7 +105,8 @@ const StyledTouchable = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       style={_style}
-      {...props}>
+      {...props}
+    >
       {children}
     </AnimatedTouchableOpacity>
   );

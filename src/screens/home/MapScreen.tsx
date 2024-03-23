@@ -55,7 +55,8 @@ function MapScreen(): JSX.Element {
           marginLeft: 16,
           marginTop: areaInsets.top || 30,
         }}
-        onPress={() => navigation.goBack()}>
+        onPress={() => navigation.goBack()}
+      >
         <Text>{t('common.back')}</Text>
       </TouchableOpacity>
       <MapView
@@ -69,7 +70,8 @@ function MapScreen(): JSX.Element {
         scrollEnabled={true}
         zoomEnabled={true}
         pitchEnabled={true}
-        rotateEnabled={true}>
+        rotateEnabled={true}
+      >
         <Marker
           title="Yor are here"
           description={`${region.latitude}, ${region.longitude}`}
