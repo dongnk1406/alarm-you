@@ -90,8 +90,7 @@ const SearchChatUserScreen = ({navigation}: Props) => {
               alignItems: 'center',
               paddingHorizontal: 16,
             }}
-            onPress={() => handleCreateChatList(user)}
-          >
+            onPress={() => handleCreateChatList(user)}>
             <AppImage
               source={{uri: user?.avatar}}
               style={{width: 50, height: 50, borderRadius: 50}}

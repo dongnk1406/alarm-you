@@ -133,8 +133,7 @@ const SignInScreen = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onPress={handleSubmit(onSubmit)}
-        >
+          onPress={handleSubmit(onSubmit)}>
           <StyledText color={'black'}>Sign In</StyledText>
         </TouchableOpacity>
 
@@ -149,8 +148,7 @@ const SignInScreen = () => {
             marginTop: 12,
             justifyContent: 'center',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <StyledText color={'neutral-black'}>Register</StyledText>
         </StyledTouchable>
       </View>

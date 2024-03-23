@@ -198,8 +198,7 @@ const SignUpScreen = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onPress={handleSubmit(onSubmit)}
-        >
+          onPress={handleSubmit(onSubmit)}>
           <Text>Register</Text>
         </TouchableOpacity>
       </View>

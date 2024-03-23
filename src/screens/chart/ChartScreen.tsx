@@ -131,8 +131,7 @@ const ChartScreen = () => {
               return date.toLocaleString('default', {month: 'short'});
             },
           }}
-          chartPressState={[firstPress, secondPress]}
-        >
+          chartPressState={[firstPress, secondPress]}>
           {({points, chartBounds}) => {
             return (
               <React.Fragment>
@@ -146,8 +145,7 @@ const ChartScreen = () => {
                   roundedCorners={{
                     topLeft: 6,
                     topRight: 6,
-                  }}
-                >
+                  }}>
                   <LinearGradient
                     start={vec(0, 0)}
                     end={vec(0, 400)}

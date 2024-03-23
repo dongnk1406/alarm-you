@@ -50,8 +50,7 @@ const ChatScreen = () => {
           <StyledTouchable
             onPress={() =>
               NavigationController.navigate('SearchChatUserScreen')
-            }
-          >
+            }>
             <StyledText color={'neutral-black'} textAlign="right">
               Create
             </StyledText>
@@ -67,8 +66,7 @@ const ChatScreen = () => {
                 marginTop: s(16),
                 alignItems: 'center',
               }}
-              onPress={() => NavigationController.navigate('SingleChatScreen')}
-            >
+              onPress={() => NavigationController.navigate('SingleChatScreen')}>
               <AppImage
                 source={{uri: user?.avatar}}
                 style={{width: 50, height: 50, borderRadius: 50}}
