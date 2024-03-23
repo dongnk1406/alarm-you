@@ -27,6 +27,7 @@ export type BottomTabsParamList = {
   HomeScreen: undefined;
   ChatScreen: undefined;
   SettingScreen: undefined;
+  ChartScreen: undefined;
 };
 
 /** Screens that don't have bottom tabs or not inside bottom tab */

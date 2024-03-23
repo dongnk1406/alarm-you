@@ -111,12 +111,14 @@ const HomeScreen = () => {
             }}
           />
         }>
-        <StyledText style={{color: 'red'}}>{appVersion}</StyledText>
+        <StyledText style={{color: '#a78bfa'}}>{appVersion}</StyledText>
 
-        <AppImage
-          source={{uri: userData?.avatar}}
-          style={{width: 100, height: 100, borderRadius: 100}}
-        />
+        {userData?.avatar && (
+          <AppImage
+            source={{uri: userData?.avatar}}
+            style={{width: 100, height: 100, borderRadius: 100}}
+          />
+        )}
 
         <StyledText style={{color: 'red'}}>{userData?.email}</StyledText>
 
@@ -235,7 +237,6 @@ const HomeScreen = () => {
             <StyledText>Hello</StyledText>
           </StyledTouchable>
         </StyledView>
-
         <View style={{marginTop: 12}}>
           {listSkill.map(skill => (
             <StyledTouchable
@@ -278,14 +279,6 @@ const HomeScreen = () => {
             </StyledTouchable>
           ))}
         </View>
-
-        <StyledView>
-          {listDucks?.images?.map(duck => (
-            <StyledText key={duck} color={'neutral-black'}>
-              {duck}
-            </StyledText>
-          ))}
-        </StyledView>
       </ScrollView>
 
       <BottomSheetModal
