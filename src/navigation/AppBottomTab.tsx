@@ -3,7 +3,12 @@ import React from 'react';
 import {Images} from 'src/assets/images';
 import {AppImage} from 'src/components/common';
 import {useAppSelector} from 'src/redux/hooks';
-import {ChartScreen, HomeScreen, SettingScreen} from 'src/screens';
+import {
+  ChartScreen,
+  HomeScreen,
+  SettingScreen,
+  CameraScreen,
+} from 'src/screens';
 import {BottomTabsParamList} from './configs/types';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
@@ -37,6 +42,14 @@ export const AppBottomTab = () => {
         component={ChartScreen}
         options={{
           tabBarLabel: 'Chart',
+          tabBarIcon: renderAppIcon,
+        }}
+      />
+      <Tab.Screen
+        name="CameraScreen"
+        component={CameraScreen}
+        options={{
+          tabBarLabel: 'Camera',
           tabBarIcon: renderAppIcon,
         }}
       />

@@ -19,7 +19,7 @@ import {getSignOutRequest} from 'src/redux/auth';
 import {useAppDispatch, useAppSelector} from 'src/redux/hooks';
 import {appVersion} from 'src/shared/configs';
 import Metrics from 'src/theme/metrics';
-import permission from 'src/utils/permission';
+import {requestCameraPermission} from 'src/utils/permission';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -33,6 +33,7 @@ const HomeScreen = () => {
   const [currentSkill, setCurrentSkill] = useState<SkillsModel | undefined>();
   const listDucks = useAppSelector(state => state.home.listDucks);
   const userData = useAppSelector(state => state.auth.user);
+  const [isCameraPermission, setCameraPermission] = useState<boolean>(false);
 
   const handleSaveSkill = async () => {
     if (currentSkill?.id) {
@@ -146,6 +147,21 @@ const HomeScreen = () => {
             navigation.navigate('MapScreen');
           }}>
           <Text>{t('common.map')}</Text>
+        </StyledTouchable>
+        <StyledTouchable
+          style={{
+            backgroundColor: 'purple',
+            padding: 8,
+            borderRadius: 4,
+            marginTop: 12,
+          }}
+          onPress={async () => {
+            if (isCameraPermission) {
+              return;
+            }
+            requestCameraPermission();
+          }}>
+          <Text>Request camera permission</Text>
         </StyledTouchable>
         <StyledTouchable
           style={{

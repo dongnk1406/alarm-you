@@ -166,7 +166,7 @@ const requestLocationPermission = async (withMsgDenied: boolean = true) => {
   }
 };
 
-export default {
+export {
   requestPhotoLibraryPermission,
   requestCameraPermission,
   requestAudioPermission,

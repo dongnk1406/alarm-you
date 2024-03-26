@@ -3,3 +3,4 @@ export * from './home';
 export * from './chat';
 export * from './setting';
 export * from './chart';
+export * from './camera';

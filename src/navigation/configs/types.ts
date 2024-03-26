@@ -28,6 +28,7 @@ export type BottomTabsParamList = {
   ChatScreen: undefined;
   SettingScreen: undefined;
   ChartScreen: undefined;
+  CameraScreen: undefined;
 };
 
 /** Screens that don't have bottom tabs or not inside bottom tab */
