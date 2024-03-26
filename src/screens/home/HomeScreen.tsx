@@ -1,9 +1,11 @@
 import {BottomSheetBackdrop, BottomSheetModal} from '@gorhom/bottom-sheet';
 import {Q} from '@nozbe/watermelondb';
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {
+  NativeEventEmitter,
+  NativeModules,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -12,28 +14,31 @@ import {
   View,
 } from 'react-native';
 import {StyledText, StyledTouchable, StyledView} from 'src/components/base';
-import {AppImage} from 'src/components/common';
 import database from 'src/database/database';
 import {SkillsModel} from 'src/database/models';
 import {getSignOutRequest} from 'src/redux/auth';
 import {useAppDispatch, useAppSelector} from 'src/redux/hooks';
 import {appVersion} from 'src/shared/configs';
-import Metrics from 'src/theme/metrics';
 import {requestCameraPermission} from 'src/utils/permission';
+const {CalendarModule} = NativeModules;
+const eventEmitter = new NativeEventEmitter(CalendarModule);
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {t} = useTranslation('translation');
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
   const dispatch = useAppDispatch();
 
-  const [text, setText] = useState<string | undefined>('');
-  const [type, setType] = useState<string>('soft');
-  const [listSkill, setListSkill] = useState<SkillsModel[]>([]);
-  const [currentSkill, setCurrentSkill] = useState<SkillsModel | undefined>();
+  const [text, setText] = React.useState<string | undefined>('');
+  const [type, setType] = React.useState<string>('soft');
+  const [listSkill, setListSkill] = React.useState<SkillsModel[]>([]);
+  const [currentSkill, setCurrentSkill] = React.useState<
+    SkillsModel | undefined
+  >();
   const listDucks = useAppSelector(state => state.home.listDucks);
   const userData = useAppSelector(state => state.auth.user);
-  const [isCameraPermission, setCameraPermission] = useState<boolean>(false);
+  const [isCameraPermission, setCameraPermission] =
+    React.useState<boolean>(false);
 
   const handleSaveSkill = async () => {
     if (currentSkill?.id) {
@@ -73,9 +78,30 @@ const HomeScreen = () => {
     setListSkill(response);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchSkills();
   }, [type]);
+
+  React.useEffect(() => {
+    const calendarEventEmitter = eventEmitter.addListener(
+      'EventCount',
+      eventCount => {
+        console.log('eventCount', eventCount);
+      },
+    );
+    return () => {
+      eventEmitter.removeAllListeners('EventCount');
+    };
+  }, []);
+
+  const createCalendarPromise = async () => {
+    try {
+      const result = await CalendarModule.createCalendarPromise();
+      console.log('createCalendarPromise', result);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   // const getListDucks = () => {
   //   try {
@@ -86,7 +112,7 @@ const HomeScreen = () => {
   //   }
   // };
 
-  // useEffect(() => {
+  // React.useEffect(() => {
   //   const promise = getListDucks();
   //   return () => {
   //     promise?.abort();
@@ -114,14 +140,18 @@ const HomeScreen = () => {
         }>
         <StyledText style={{color: '#a78bfa'}}>{appVersion}</StyledText>
 
-        {userData?.avatar && (
-          <AppImage
-            source={{uri: userData?.avatar}}
-            style={{width: 100, height: 100, borderRadius: 100}}
-          />
-        )}
-
-        <StyledText style={{color: 'red'}}>{userData?.email}</StyledText>
+        <StyledTouchable
+          style={{
+            backgroundColor: 'purple',
+            padding: 8,
+            borderRadius: 4,
+            marginTop: 12,
+          }}
+          onPress={createCalendarPromise}>
+          <StyledText color={'neutral-white'}>
+            Create calendar promise
+          </StyledText>
+        </StyledTouchable>
 
         <StyledTouchable
           style={{
@@ -134,7 +164,7 @@ const HomeScreen = () => {
             const hasPermission =
               await permission.requestPhotoLibraryPermission();
           }}>
-          <Text>Open gallery</Text>
+          <StyledText color={'neutral-white'}>Open gallery</StyledText>
         </StyledTouchable>
         <StyledTouchable
           style={{
@@ -146,7 +176,7 @@ const HomeScreen = () => {
           onPress={async () => {
             navigation.navigate('MapScreen');
           }}>
-          <Text>{t('common.map')}</Text>
+          <StyledText color={'neutral-white'}>{t('common.map')}</StyledText>
         </StyledTouchable>
         <StyledTouchable
           style={{
@@ -161,7 +191,9 @@ const HomeScreen = () => {
             }
             requestCameraPermission();
           }}>
-          <Text>Request camera permission</Text>
+          <StyledText color={'neutral-white'}>
+            Request camera permission
+          </StyledText>
         </StyledTouchable>
         <StyledTouchable
           style={{
